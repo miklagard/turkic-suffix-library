@@ -1,5 +1,5 @@
 import inspect
-from turkish_suffix_library.turkish_class import TurkishClass
+from turkic_suffix_library.languages.turkish.turkish_class import TurkishClass
 
 
 class Turkish(TurkishClass):
@@ -30,7 +30,7 @@ class Turkish(TurkishClass):
         proper_noun = kwargs.get('proper_noun')
 
         if not self.apostrophes(**kwargs):
-            self.word = self.exception_missing(proper_noun)
+            self.exception_missing()
 
         if self.last_letter_is_vowel():
             if self.n_connector():
@@ -66,7 +66,7 @@ class Turkish(TurkishClass):
         else:
             if not proper_noun:
                 self.ng_change()
-                self.word = self.exception_missing(proper_noun)
+                self.exception_missing()
 
             if self.last_letter_is_vowel():
                 if self.n_connector():
@@ -85,7 +85,6 @@ class Turkish(TurkishClass):
         """
             -den hali
         """
-        ae = self.letter_a()
         self.apostrophes(**kwargs)
 
         if self.n_connector():
@@ -93,7 +92,7 @@ class Turkish(TurkishClass):
 
         self.if_ends_with_hard('t', 'd')
 
-        self.concat(f'{ae}n')
+        self.concat(f'{self.letter_a()}n')
 
         return self.common_return(**kwargs)
 
@@ -101,8 +100,6 @@ class Turkish(TurkishClass):
         """
             -de hali
         """
-        letter_a = self.letter_a()
-
         self.apostrophes(**kwargs)
 
         if self.n_connector():
@@ -110,7 +107,7 @@ class Turkish(TurkishClass):
 
         self.if_ends_with_hard('t', 'd')
 
-        self.concat(letter_a)
+        self.concat(self.letter_a())
 
         return self.common_return(**kwargs)
 
@@ -122,7 +119,6 @@ class Turkish(TurkishClass):
         """
 
         last_letter_is_vowel = self.last_letter_is_vowel()
-        minor = self.minor()
         proper_noun = self.apostrophes(**kwargs)
 
         if proper_noun:
@@ -136,9 +132,9 @@ class Turkish(TurkishClass):
             else:
                 self.soften()
 
-                self.exception_missing(proper_noun)
+                self.exception_missing()
 
-        self.concat(f'{minor}n')
+        self.concat(f'{self.minor()}n')
 
         return self.common_return(**kwargs)
 
@@ -157,16 +153,12 @@ class Turkish(TurkishClass):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
         """
-        is_vowel = self.last_letter_is_vowel()
-
-        ae = self.letter_a()
-
         self.apostrophes(**kwargs)
 
-        if is_vowel:
+        if self.last_letter_is_vowel():
             self.concat('y')
 
-        self.concat(f'l{ae}')
+        self.concat(f'l{self.letter_a()}')
 
         return self.common_return(**kwargs)
 
@@ -178,8 +170,6 @@ class Turkish(TurkishClass):
         person = str(kwargs.get('person', 3))
         plural = kwargs.get('plural', False)
 
-        minor = self.minor()
-
         proper_noun = self.apostrophes(**kwargs)
 
         if not (person == '3' and plural):
@@ -188,18 +178,18 @@ class Turkish(TurkishClass):
 
                 self.soften()
 
-                self.exception_missing(proper_noun)
+                self.exception_missing()
 
         if not plural:
             if person == '1':
                 if not self.last_letter_is_vowel():
-                    self.concat(minor)
+                    self.concat(self.minor())
 
                 self.concat('m')
 
             elif person == '2':
                 if not self.last_letter_is_vowel():
-                    self.concat(minor)
+                    self.concat(self.minor())
 
                 self.concat('n')
 
@@ -207,19 +197,19 @@ class Turkish(TurkishClass):
                 if self.last_letter_is_vowel():
                     self.concat('s')
 
-                self.concat(minor)
+                self.concat(self.minor())
         else:
             if person == '1':
                 if not self.last_letter_is_vowel():
-                    self.concat(minor)
+                    self.concat(self.minor())
 
-                self.concat(f'm{minor}z')
+                self.concat(f'm{self.minor()}z')
 
             elif person == '2':
                 if not self.last_letter_is_vowel():
-                    self.concat(minor)
+                    self.concat(self.minor())
 
-                self.concat(f'n{minor}z')
+                self.concat(f'n{self.minor()}z')
             else:
                 if self.lower() == 'ism':
                     self.from_upper_or_lower('isim')
@@ -237,8 +227,7 @@ class Turkish(TurkishClass):
         return self.common_return(**kwargs)
 
     def privative(self, **kwargs):
-        minor = self.minor()
-        self.concat(f's{minor}z')
+        self.concat(f's{self.minor()}z')
         return self.common_return(**kwargs)
 
     def ordinal(self, **kwargs):
@@ -252,14 +241,12 @@ class Turkish(TurkishClass):
             * ilk (first) -> ilkinci (ilk already means "first" but you can still put this suffix)
         """
 
-        minor = self.minor()
-
         self.if_ends_with('t', 'd')
 
         if not self.last_letter_is_vowel():
-            self.concat(minor)
+            self.concat(self.minor())
 
-        self.concat(f'nc{minor}')
+        self.concat(f'nc{self.minor()}')
 
         return self.common_return(**kwargs)
 

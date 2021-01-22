@@ -1,0 +1,2 @@
+class Azeri:
+    pass

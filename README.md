@@ -1,15 +1,13 @@
-Turkish.py
-==========
-
-### Turkish Suffix Library for Python
+Turkic Suffix Library
+=====================
 
 ## Install 
-    pip install turkish-suffix-library
+    pip install turkic-suffix-library
 
 ## Using
 
 #### Nouns
-    from turkish_suffix_library.turkish import Turkish
+    from turkic_suffix_library import Turkish
 
     print(Turkish('araba').dative())
     print(Turkish('sebep').ablative())

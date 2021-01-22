@@ -1,6 +1,5 @@
-from turkish_suffix_library.turkish import Turkish
 import sqlite3
-from turkish_suffix_library.sample_verbs_list import VERBS
+from turkic_suffix_library.languages.turkish.sample_verbs_list import VERBS
 
 TENSES = [
     'imperative_mood',

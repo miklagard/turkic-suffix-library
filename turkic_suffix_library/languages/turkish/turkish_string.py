@@ -1,4 +1,4 @@
-from turkish_suffix_library import consonants
+from turkic_suffix_library.languages.turkish import consonants
 
 
 def is_upper(word):

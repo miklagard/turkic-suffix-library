@@ -1,5 +1,5 @@
-import turkish_suffix_library.turkish_string as tr
-import turkish_suffix_library.consonants as con
+import turkic_suffix_library.languages.turkish.turkish_string as tr
+import turkic_suffix_library.languages.turkish.consonants as con
 
 
 class TurkishClass:
@@ -94,7 +94,8 @@ class TurkishClass:
         return self.word
 
     def exception_missing(self, proper_noun):
-        return tr.exception_missing(self.word, proper_noun)
+        self.word = tr.exception_missing(self.word)
+        return self.word
 
     def from_upper_or_lower(self, new_word):
         self.word = tr.from_upper_or_lower(new_word, self.word)

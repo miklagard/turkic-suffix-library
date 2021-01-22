@@ -1,4 +1,4 @@
-from turkish_suffix_library.turkish import Turkish
+from turkic_suffix_library import Turkish
 import unittest
 
 
