@@ -1,43 +1,23 @@
 import turkic_suffix_library.languages.turkish.turkish_string as tr
 import turkic_suffix_library.languages.turkish.consonants as con
+from turkic_suffix_library.languages.common.turkic_class import TurkicClass
 
 
-class TurkishClass:
+class TurkishClass(TurkicClass):
     def __init__(self, parameter_word: str, **kwargs):
-        self.word = parameter_word
-        self.stem = kwargs.get('stem', parameter_word)
-        self.history = kwargs.get('history', [])
-
-    def __str__(self):
-        return self.word
-
-    def to_string(self):
-        return self.word
-
-    def to_json(self):
-        return {
-            'result': self.word,
-            'stem': self.stem,
-            'history': self.history
-        }
-
-    def last_word(self):
-        return self.word.lower().split(' ')[-1]
-
-    def other_words_but_not_last(self):
-        return ' '.join(self.word.lower().split(' ')[:-1])
+        super().__init__(parameter_word, **kwargs)
+        self.language = 'turkish'
 
     def make_plural(self):
         self.concat(f'l{self.letter_a()}r')
 
         return self.word
 
-    def apostrophes(self, **kwargs):
-        if kwargs.get('proper_noun'):
+    def apostrophes(self, proper_noun=False):
+        if proper_noun:
             self.word += "'"
-            return True
-        else:
-            return False
+
+        return proper_noun
 
     def last_vowel(self):
         return tr.last_vowel(self.word)
@@ -82,23 +62,12 @@ class TurkishClass:
         if self.last_letter_is_vowel():
             self.concat(concat_text)
 
-    def lower(self):
-        return tr.make_lower(self.word)
-
     def soften(self):
         self.word = tr.soften(self.word)
         return self.word
 
-    def concat(self, concat_string):
-        self.word = tr.concat(self.word, concat_string)
-        return self.word
-
-    def exception_missing(self, proper_noun):
+    def exception_missing(self):
         self.word = tr.exception_missing(self.word)
-        return self.word
-
-    def from_upper_or_lower(self, new_word):
-        self.word = tr.from_upper_or_lower(new_word, self.word)
         return self.word
 
     def is_from_able(self):
@@ -121,13 +90,12 @@ class TurkishClass:
         return False
 
     def ng_change(self):
-        word = self.lower()
+        word = self.last_word()
 
         for noun in con.NK_G_CHANGE:
             if word.endswith(noun):
-                return self.from_upper_or_lower(
-                    word[:-len(noun)] + con.NK_G_CHANGE.get(noun, self.word)
-                )
+                self.word = self.from_upper_or_lower(word[:-len(noun)] + con.NK_G_CHANGE.get(noun, self.word))
+                return self.word
 
         return self.word
 
@@ -148,7 +116,7 @@ class TurkishClass:
         return word in con.VERB_MINOR_HARMONY_EXCEPTIONS
 
     def harden_verb(self):
-        lower = self.lower()
+        lower = self.lower(self.word)
 
         for hard in con.VERBS_HARDEN:
             if lower.endswith(hard):
@@ -160,20 +128,20 @@ class TurkishClass:
 
     def verbs_losing_vowels(self):
         self.word = self.from_upper_or_lower(
-            con.VERBS_LOSING_VOWELS.get(self.lower(), self.word)
+            con.VERBS_LOSING_VOWELS.get(self.lower(self.word), self.word)
         )
         return self.word
 
     def n_connector(self):
-        return self.lower() in con.N_CONNECTOR
+        return self.lower(self.word) in con.N_CONNECTOR
 
     def harmony_for_present(self):
-        vowel = self.last_vowel()['letter'].lower()
+        vowel = self.lower(self.last_vowel()['letter'])
 
         return con.HARMONY_FOR_PRESENT.get(vowel, vowel)
 
     def harmony_for_present_first(self):
-        vowel = self.last_vowel()['letter'].lower()
+        vowel = self.lower(self.last_vowel()['letter'])
 
         return con.HARMONY_FOR_PRESENT_FIRST.get(vowel, vowel)
 
@@ -181,15 +149,3 @@ class TurkishClass:
         vowel = self.last_vowel()
 
         return vowel['vowel_count']
-
-    def if_condition(self, person, plural, *args):
-        for arg in args:
-            person_param = arg[0]
-            plural_param = arg[1]
-            suffix = arg[2]
-
-            if person == person_param and plural_param == plural:
-                self.concat(suffix)
-                return self.word
-
-        return self.word

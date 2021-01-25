@@ -204,7 +204,6 @@ print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question
 print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=3, plural=True))
 
 
-
 if __name__ == '__main__':
     unittest.main()
 

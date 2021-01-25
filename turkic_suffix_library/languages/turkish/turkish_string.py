@@ -1,14 +1,6 @@
 from turkic_suffix_library.languages.turkish import consonants
 
 
-def is_upper(word):
-    word = word.replace('ı', 'i').replace('İ', 'I').replace('ş', 's').replace('Ş', 'S').replace('ğ', 'g').\
-        replace('Ğ', 'G').replace('ü', '').replace('Ü', 'U').replace('ç', 'c').replace('Ç', 'C').\
-        replace('ö', 'o').replace('Ö', 'O')
-
-    return word.isupper()
-
-
 def make_lower(word):
     return word.replace('İ', 'i').replace('I', 'ı').lower()
 
@@ -18,7 +10,7 @@ def make_upper(word):
  
 
 def concat(string_left, string_right):
-    if is_upper(string_left):
+    if string_left.isupper():
         return_data = string_left + make_upper(string_right)
     else:
         return_data = string_left + string_right
@@ -27,10 +19,10 @@ def concat(string_left, string_right):
 
 
 def from_upper_or_lower(new_word, reference_word):
-    if is_upper(reference_word[len(reference_word) - 1]):
+    if reference_word[len(reference_word) - 1].isupper():
         return_data = make_upper(new_word)
     else:
-        if is_upper(reference_word[0]):
+        if reference_word[0].isupper():
             return_data = make_upper(new_word[0]) + make_lower(new_word[1:])
         else:
             return_data = make_lower(new_word)
