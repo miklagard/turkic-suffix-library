@@ -83,7 +83,8 @@ ARABIC_T = (
     'tehdit',
     'tevellüt',
     'velet',
-    'vücut'
+    'vücut',
+    'yurt'
 )
 
 # If a noun has more than one syllable and if the last letter is k,

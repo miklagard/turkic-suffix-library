@@ -1,14 +1,3 @@
-MINOR_HARMONY = {
-    'i': 'i',
-    'e': 'i',
-    'ä': 'i',
-    'u': 'u',
-    'ü': 'ü',
-    'ö': 'i',
-    'o': 'y',
-    'a': 'y',
-    'y': 'y',
-}
 VOWELS = {
     'back': ('i', 'ü', 'e', 'ö', 'ä'),
     'front': ('y', 'u', 'o', 'a'),
@@ -36,6 +25,18 @@ CONSONANTS = {
 SOFTEN = {
     'ç': 'j',
     'k': 'g',
+    't': 'd',
+    'p': 'b'
+}
+
+MISSING_VOWEL = {
+    'akyl': 'akl',
+    'bagyr': 'bagr',
+    'burun': 'burn',
+    'garyn': 'garn',
+    'ogul': 'ogl',
+    'uruş': 'urş',
+    'ylym': 'ylm'
 }
 
 """

@@ -1,6 +1,12 @@
 Turkic Suffix Library
 =====================
 
+## Supported Languages
+
+   Turkish: Verbs & nouns (by Cem Yildiz)
+
+   Turkmen: Nouns (by Oğuzhan Moroğlu)
+
 ## Install 
     pip install turkic-suffix-library
 
@@ -74,7 +80,7 @@ The most of the methods are not supported yet, under development
 
 * Demo: https://trstem.com
 
-## Other Languages 
+## Other Programming Languages 
       C# Version
       https://github.com/yasinkuyu/Turkish.cs
       

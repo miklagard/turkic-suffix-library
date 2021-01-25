@@ -74,4 +74,5 @@ class TurkicClass:
 
     def change_last_letter(self, new_last_letter):
         self.word = self.word[0:len(self.word) - 1] + new_last_letter
+
         return self.word
