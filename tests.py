@@ -192,18 +192,6 @@ class Verb(unittest.TestCase):
         )
 
 
-negative = False
-verb = 'salla'
-question = False
-tense = 'past_perfect_narrative'
-print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=1, plural=False))
-print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=2, plural=False))
-print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=3, plural=False))
-print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=1, plural=True))
-print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=2, plural=True))
-print(Turkish(verb).__getattribute__(tense)(negative=negative, question=question, person=3, plural=True))
-
-
 if __name__ == '__main__':
     unittest.main()
 

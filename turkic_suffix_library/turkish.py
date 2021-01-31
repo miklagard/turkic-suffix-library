@@ -414,13 +414,12 @@ class Turkish(TurkishClass):
 
         if not negative:
             self.harden_verb()
-            minor = self.minor()
 
             if self.last_letter_is_vowel():
                 self.word = self.word[:-1]
-                self.concat(minor)
+                self.concat(self.minor())
             else:
-                self.concat(minor)
+                self.concat(self.minor())
         else:
             minor = self.minor()
 
