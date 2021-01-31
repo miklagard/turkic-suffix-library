@@ -13,9 +13,7 @@ class TurkishClass(TurkicClass):
 
         return self.word
 
-    def apostrophes(self, **kwargs):
-        proper_noun = kwargs.get('proper_noun', False)
-
+    def apostrophes(self, proper_noun=False):
         if proper_noun:
             self.word += "'"
 

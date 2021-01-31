@@ -287,6 +287,7 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
+        proper_noun = kwargs.get('proper_noun', False)
 
         kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
@@ -313,7 +314,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                if not self.apostrophes(**kwargs):
+                if not self.apostrophes(proper_noun):
                     if person == 1 and not plural:
                         self.soften()
                     elif person == 1 and plural:
@@ -345,6 +346,7 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
+        proper_noun = kwargs.get('proper_noun', False)
 
         kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
@@ -357,7 +359,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                self.apostrophes(**kwargs)
+                self.apostrophes(proper_noun)
 
             self.if_ends_with_vowel('y')
 
@@ -393,7 +395,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                self.apostrophes(**kwargs)
+                self.apostrophes(False)
 
             self.if_ends_with_vowel('y')
 
