@@ -21,10 +21,12 @@ class Turkish(TurkishClass):
 
         return self.common_return(**kwargs)
 
-    def accusative(self, proper_noun=False):
+    def accusative(self, **kwargs):
         """
             -i hali
         """
+
+        proper_noun = kwargs.get('proper_noun', False)
 
         if not self.apostrophes(proper_noun):
             self.exception_missing()
@@ -43,10 +45,12 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun)
 
-    def dative(self, proper_noun=False):
+    def dative(self, **kwargs):
         """
             -e hali
         """
+
+        proper_noun = kwargs.get('proper_noun', False)
 
         # firstly exceptions for ben (I) and you (sen)
 
@@ -77,10 +81,12 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun)
 
-    def ablative(self, proper_noun=False):
+    def ablative(self, **kwargs):
         """
             -den hali
         """
+        proper_noun = kwargs.get('proper_noun', False)
+
         self.apostrophes(proper_noun)
 
         if self.n_connector():
@@ -92,10 +98,12 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun)
 
-    def locative(self, proper_noun=False):
+    def locative(self, **kwargs):
         """
             -de hali
         """
+        proper_noun = kwargs.get('proper_noun', False)
+
         self.apostrophes(proper_noun)
 
         if self.n_connector():
@@ -107,12 +115,13 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun)
 
-    def genitive(self, proper_noun=False):
+    def genitive(self, **kwargs):
         """
             Iyelik aitlik eki
             Ayakkabinin
             Elif'in
         """
+        proper_noun = kwargs.get('proper_noun', False)
 
         last_letter_is_vowel = self.last_letter_is_vowel()
         self.apostrophes(proper_noun)
@@ -134,7 +143,7 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun)
 
-    def equalative(self):
+    def equalative(self, **kwargs):
         """
             Ismin esitlik hali: -ce, -ca etc.
         """
@@ -145,10 +154,12 @@ class Turkish(TurkishClass):
 
         return self.common_return(**{})
 
-    def instrumental(self, proper_noun=False):
+    def instrumental(self, **kwargs):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
         """
+        proper_noun = kwargs.get('proper_noun', False)
+
         self.apostrophes(proper_noun)
 
         if self.last_letter_is_vowel():
@@ -158,11 +169,14 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun)
 
-    def possessive(self, proper_noun=False, person=3, plural=False):
+    def possessive(self, **kwargs):
         """
             Iyelik tamlanan eki
             Ayakkabısı
         """
+        proper_noun = kwargs.get('proper_noun', False)
+        person = kwargs.get('person', 3)
+        plural = kwargs.get('plural', False)
 
         self.apostrophes(proper_noun)
 
@@ -213,17 +227,19 @@ class Turkish(TurkishClass):
 
         return self.common_return(proper_noun=proper_noun, person=person, plural=plural)
 
-    def relative_pronoun(self, proper_noun=False):
+    def relative_pronoun(self, **kwargs):
+        proper_noun = kwargs.get('proper_noun', False)
+
         self.genitive(proper_noun=proper_noun)
         self.concat('ki')
 
         return self.common_return(proper_noun=proper_noun)
 
-    def privative(self):
+    def privative(self, **kwargs):
         self.concat(f's{self.minor()}z')
         return self.common_return()
 
-    def ordinal(self):
+    def ordinal(self, **kwargs):
         """
             Ordinal numbers: One->First, Two->Second etc.
 
@@ -243,7 +259,7 @@ class Turkish(TurkishClass):
 
         return self.common_return()
 
-    def distributive(self):
+    def distributive(self, **kwargs):
         """
             Distributive numbers: One->One each, Two->Two each.
 
@@ -261,11 +277,16 @@ class Turkish(TurkishClass):
 
         return self.common_return()
 
-    def copula_present(self, person=3, plural=False, negative=False, question=False):
+    def copula_present(self, **kwargs):
         """
             kedidir
             kedi degildir
         """
+
+        person = kwargs.get('person', 3)
+        plural = kwargs.get('plural', False)
+        negative = kwargs.get('negative', False)
+        question = kwargs.get('question', False)
 
         kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
@@ -315,11 +336,15 @@ class Turkish(TurkishClass):
 
         return self.common_return(**kwargs)
 
-    def copula_definite_past(self, person=3, plural=False, negative=False, question=False):
+    def copula_definite_past(self, **kwargs):
         """
             kediydi
             kedi degildi
         """
+        person = kwargs.get('person', 3)
+        plural = kwargs.get('plural', False)
+        negative = kwargs.get('negative', False)
+        question = kwargs.get('question', False)
 
         kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
