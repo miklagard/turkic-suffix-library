@@ -397,6 +397,9 @@ class Turkish(TurkishClass):
 
         self.concat(f'm{ae}k')
 
+        if kwargs.get('question', False):
+            self.concat(f' m{self.minor()}')
+
         return self.common_return(**kwargs)
     
     def present_continuous_simple(self, **kwargs):
@@ -1353,11 +1356,12 @@ class Turkish(TurkishClass):
         if self.is_from_passive():
             negative = False
 
-        self.word = self.past_definite(
-            person=3,
-            plural=plural,
-            negative=negative,
-        ).to_string()
+        if not plural or question:
+            self.word = self.past_definite(
+                person=3,
+                plural=False,
+                negative=negative,
+            ).to_string()
 
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
