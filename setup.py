@@ -11,7 +11,7 @@ setuptools.setup(
     description="Turkic suffix library",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/miklagard/Turkic-Suffix-Library",
+    url="https://github.com/miklagard/turkic-suffix-library",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

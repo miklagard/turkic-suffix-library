@@ -34,9 +34,9 @@ class Turkmen(TurkmenClass):
         return self.common_return()
 
     def accusative(self):
-        '''
+        """
             -i hali
-        '''
+        """
 
         if self.lower(self.word) == 'ol':
             self.word = self.from_upper_or_lower('ony')
@@ -53,9 +53,9 @@ class Turkmen(TurkmenClass):
         return self.common_return()
 
     def dative(self):
-        '''
+        """
             -e hali
-        '''
+        """
         lower = self.lower(self.word)
 
         if lower == 'ol':
