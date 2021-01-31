@@ -451,7 +451,7 @@ class Turkish(TurkishClass):
                 [1, False, f'{self.minor()}m'],
                 [2, False, f's{self.minor()}n'],
                 [1, True, f'{self.minor()}z'],
-                [2, True, f'{self.minor()}n{self.minor()}z']
+                [2, True, f's{self.minor()}n{self.minor()}z']
             )
 
         return self.common_return(**kwargs)

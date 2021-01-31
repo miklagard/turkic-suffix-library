@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="turkic-suffix-library",
-    version="0.0.2",
+    version="0.0.3",
     author="Cem Yildiz, Oguzhan Moroglu, Sadullah Duman",
     author_email="cem.yildiz@ya.ru",
     description="Turkic suffix library",
