@@ -63,6 +63,7 @@ ARABIC_T = (
     'hasat',
     'haset',
     'hudut',
+    'kürt',
     'mabat',
     'mabet',
     'maksat',
