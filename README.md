@@ -34,7 +34,14 @@ Turkic Suffix Library
     print(Turkish('yedi').distributive())
     Turkish('kedi').instrumental()
 
-        
+    print(Turkish('Marmara Denizi').dative())
+    print(Turkish('İstanbul Üniversitesi').dative())
+
+    print(Turkish('Marmara Denizi', possessive=True, proper_noun=True).dative())
+    print(Turkish('İstanbul Üniversitesi', possessive=True).dative())
+
+    print(Turkish('İstanbul Üniversite').possessive().dative())
+
 ##### Output
     arabaya
     sebepten
@@ -58,6 +65,11 @@ Turkic Suffix Library
     dördüncü
     yedişer
     kediyle
+    Marmara Deniziye
+    İstanbul Üniversitesiye
+    Marmara Denizi'ne
+    İstanbul Üniversitesine
+    İstanbul Üniversitesine
 
 
 ## Turkish Grammar

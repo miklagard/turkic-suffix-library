@@ -6,6 +6,12 @@ from turkic_suffix_library.languages.common.turkic_class import TurkicClass
 class TurkishClass(TurkicClass):
     def __init__(self, parameter_word: str, **kwargs):
         super().__init__(parameter_word, **kwargs)
+
+        if kwargs.get('possessive', False):
+            self.history.append({
+                'action': 'possessive'
+            })
+
         self.language = 'turkish'
 
     def make_plural(self):
@@ -13,11 +19,14 @@ class TurkishClass(TurkicClass):
 
         return self.word
 
-    def apostrophes(self, proper_noun=False):
-        if proper_noun:
+    def apostrophes(self):
+        if self.proper_noun and not self.apostrophes_applied:
             self.word += "'"
+            self.apostrophes_applied = True
 
-        return proper_noun
+            return True
+        else:
+            return False
 
     def last_vowel(self):
         return tr.last_vowel(self.word)
@@ -133,6 +142,10 @@ class TurkishClass(TurkicClass):
         return self.word
 
     def n_connector(self):
+        if self.history:
+            if self.history[-1].get('action') == 'possessive':
+                return True
+
         return self.lower(self.word) in con.N_CONNECTOR
 
     def harmony_for_present(self):

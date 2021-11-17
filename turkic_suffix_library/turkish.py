@@ -7,6 +7,7 @@ class Turkish(TurkishClass):
         self.history.append({
             'action': inspect.stack()[1][3],
             'current': self.word,
+            'proper_noun': self.proper_noun,
             'kwargs': kwargs
         })
 
@@ -26,9 +27,7 @@ class Turkish(TurkishClass):
             -i hali
         """
 
-        proper_noun = kwargs.get('proper_noun', False)
-
-        if not self.apostrophes(proper_noun):
+        if not self.apostrophes():
             self.exception_missing()
 
         if self.last_letter_is_vowel():
@@ -37,34 +36,31 @@ class Turkish(TurkishClass):
             else:
                 self.concat('y')
 
-        if not proper_noun:
+        if not self.proper_noun or self.apostrophes_applied:
             self.ng_change()
             self.soften()
 
         self.concat(self.minor())
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def dative(self, **kwargs):
         """
             -e hali
         """
-
-        proper_noun = kwargs.get('proper_noun', False)
-
         # firstly exceptions for ben (I) and you (sen)
 
         lower_word = self.lower(self.word)
         letter_a = self.letter_a()
 
-        self.apostrophes(proper_noun)
+        self.apostrophes()
 
-        if lower_word == 'ben' and not proper_noun:
+        if lower_word == 'ben' and not self.proper_noun:
             self.word = self.from_upper_or_lower('bana')
-        elif lower_word == 'sen' and not proper_noun:
+        elif lower_word == 'sen' and not self.proper_noun:
             self.word = self.from_upper_or_lower('sana')
         else:
-            if not proper_noun:
+            if not self.proper_noun or self.apostrophes_applied:
                 self.ng_change()
                 self.exception_missing()
 
@@ -74,20 +70,18 @@ class Turkish(TurkishClass):
                 else:
                     self.concat('y')
 
-            if not proper_noun:
+            if not self.proper_noun or self.apostrophes_applied:
                 self.soften()
 
             self.concat(letter_a)
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def ablative(self, **kwargs):
         """
             -den hali
         """
-        proper_noun = kwargs.get('proper_noun', False)
-
-        self.apostrophes(proper_noun)
+        self.apostrophes()
 
         if self.n_connector():
             self.concat('n')
@@ -96,15 +90,13 @@ class Turkish(TurkishClass):
 
         self.concat(f'{self.letter_a()}n')
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def locative(self, **kwargs):
         """
             -de hali
         """
-        proper_noun = kwargs.get('proper_noun', False)
-
-        self.apostrophes(proper_noun)
+        self.apostrophes()
 
         if self.n_connector():
             self.concat('n')
@@ -113,7 +105,7 @@ class Turkish(TurkishClass):
 
         self.concat(self.letter_a())
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def genitive(self, **kwargs):
         """
@@ -121,12 +113,10 @@ class Turkish(TurkishClass):
             Ayakkabinin
             Elif'in
         """
-        proper_noun = kwargs.get('proper_noun', False)
-
         last_letter_is_vowel = self.last_letter_is_vowel()
-        self.apostrophes(proper_noun)
+        self.apostrophes()
 
-        if proper_noun:
+        if not self.proper_noun:
             if last_letter_is_vowel:
                 self.concat('n')
         else:
@@ -141,7 +131,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'{self.minor()}n')
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def equalative(self, **kwargs):
         """
@@ -158,30 +148,25 @@ class Turkish(TurkishClass):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
         """
-        proper_noun = kwargs.get('proper_noun', False)
-
-        self.apostrophes(proper_noun)
+        self.apostrophes()
 
         if self.last_letter_is_vowel():
             self.concat('y')
 
         self.concat(f'l{self.letter_a()}')
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def possessive(self, **kwargs):
         """
             Iyelik tamlanan eki
             Ayakkabısı
         """
-        proper_noun = kwargs.get('proper_noun', False)
         person = kwargs.get('person', 3)
         plural = kwargs.get('plural', False)
 
-        self.apostrophes(proper_noun)
-
         if not (person == 3 and plural):
-            if not proper_noun:
+            if not self.proper_noun:
                 self.ng_change()
 
                 self.soften()
@@ -225,15 +210,13 @@ class Turkish(TurkishClass):
                 self.concat(f'l{self.letter_a()}r')
                 self.concat(self.minor())
 
-        return self.common_return(proper_noun=proper_noun, person=person, plural=plural)
+        return self.common_return(person=person, plural=plural)
 
     def relative_pronoun(self, **kwargs):
-        proper_noun = kwargs.get('proper_noun', False)
-
-        self.genitive(proper_noun=proper_noun)
+        self.genitive()
         self.concat('ki')
 
-        return self.common_return(proper_noun=proper_noun)
+        return self.common_return()
 
     def privative(self, **kwargs):
         self.concat(f's{self.minor()}z')
@@ -287,7 +270,6 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
-        proper_noun = kwargs.get('proper_noun', False)
 
         kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
@@ -314,7 +296,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                if not self.apostrophes(proper_noun):
+                if not self.apostrophes():
                     if person == 1 and not plural:
                         self.soften()
                     elif person == 1 and plural:
@@ -346,7 +328,6 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
-        proper_noun = kwargs.get('proper_noun', False)
 
         kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
@@ -359,7 +340,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                self.apostrophes(proper_noun)
+                self.apostrophes()
 
             self.if_ends_with_vowel('y')
 
