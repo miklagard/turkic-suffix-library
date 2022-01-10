@@ -19,7 +19,9 @@ class TurkishClass(TurkicClass):
 
         return self.word
 
-    def apostrophes(self):
+    def apostrophes(self, **kwargs):
+        self.proper_noun = kwargs.get('proper_noun')
+
         if self.proper_noun and not self.apostrophes_applied:
             self.word += "'"
             self.apostrophes_applied = True

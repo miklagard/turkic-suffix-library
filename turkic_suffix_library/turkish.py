@@ -27,7 +27,7 @@ class Turkish(TurkishClass):
             -i hali
         """
 
-        if not self.apostrophes():
+        if not self.apostrophes(**kwargs):
             self.exception_missing()
 
         if self.last_letter_is_vowel():
@@ -53,7 +53,7 @@ class Turkish(TurkishClass):
         lower_word = self.lower(self.word)
         letter_a = self.letter_a()
 
-        self.apostrophes()
+        self.apostrophes(**kwargs)
 
         if lower_word == 'ben' and not self.proper_noun:
             self.word = self.from_upper_or_lower('bana')
@@ -81,7 +81,7 @@ class Turkish(TurkishClass):
         """
             -den hali
         """
-        self.apostrophes()
+        self.apostrophes(**kwargs)
 
         if self.n_connector():
             self.concat('n')
@@ -96,7 +96,7 @@ class Turkish(TurkishClass):
         """
             -de hali
         """
-        self.apostrophes()
+        self.apostrophes(**kwargs)
 
         if self.n_connector():
             self.concat('n')
@@ -114,7 +114,7 @@ class Turkish(TurkishClass):
             Elif'in
         """
         last_letter_is_vowel = self.last_letter_is_vowel()
-        self.apostrophes()
+        self.apostrophes(**kwargs)
 
         if not self.proper_noun:
             if last_letter_is_vowel:
@@ -148,7 +148,7 @@ class Turkish(TurkishClass):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
         """
-        self.apostrophes()
+        self.apostrophes(**kwargs)
 
         if self.last_letter_is_vowel():
             self.concat('y')
@@ -296,7 +296,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                if not self.apostrophes():
+                if not self.apostrophes(**kwargs):
                     if person == 1 and not plural:
                         self.soften()
                     elif person == 1 and plural:
@@ -340,7 +340,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                self.apostrophes()
+                self.apostrophes(**kwargs)
 
             self.if_ends_with_vowel('y')
 
@@ -376,7 +376,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
             else:
-                self.apostrophes(False)
+                self.apostrophes(**kwargs)
 
             self.if_ends_with_vowel('y')
 

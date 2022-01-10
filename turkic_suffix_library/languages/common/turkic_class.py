@@ -4,7 +4,7 @@ class TurkicClass:
         self.stem = kwargs.get('stem', parameter_word)
         self.history = kwargs.get('history', [])
         self.language = kwargs.get('language')
-        self.proper_noun = kwargs.get('proper_noun')
+        self.proper_noun = kwargs.get('proper_noun', False)
         self.apostrophes_applied = False
 
     def __str__(self):
