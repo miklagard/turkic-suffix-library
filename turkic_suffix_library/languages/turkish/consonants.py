@@ -259,6 +259,7 @@ EXCEPTION_MISSING = {
     #katli, katle, katli etc. it doesn't really have a nominative case but only with suffixes?
     'fasıl': 'fasl',
     'nakit': 'nakt',
+    # Thanks to Tim Inva for additions
     'alın': 'aln',
     'şehir': 'şehr',
     'izin': 'izn',
