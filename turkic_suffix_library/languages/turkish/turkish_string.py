@@ -142,7 +142,7 @@ def exception_missing(parameter_word, proper_noun=False):
         last = last_word(parameter_word)
 
         if last in consonants.EXCEPTION_MISSING:
-            word = consonants.EXCEPTION_MISSING[last],
+            word = consonants.EXCEPTION_MISSING[last]
 
             last = from_upper_or_lower(
                 concat(
