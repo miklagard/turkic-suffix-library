@@ -18,6 +18,9 @@ class Turkish(TurkishClass):
         )
 
     def plural(self, **kwargs):
+        if self.n_connector():
+            self.concat('n')
+
         self.concat(f'l{self.letter_a()}r')
 
         return self.common_return(**kwargs)
@@ -119,15 +122,15 @@ class Turkish(TurkishClass):
         if not self.proper_noun:
             if last_letter_is_vowel:
                 self.concat('n')
+            else:
+                self.soften()
+
+                self.exception_missing()
         else:
             self.ng_change()
 
             if last_letter_is_vowel:
                 self.concat('n')
-            else:
-                self.soften()
-
-                self.exception_missing()
 
         self.concat(f'{self.minor()}n')
 
@@ -139,6 +142,10 @@ class Turkish(TurkishClass):
         """
 
         letter_a = self.letter_a()
+
+        if self.n_connector():
+            self.concat('n')
+
         self.if_ends_with_hard('ç', 'c')
         self.concat(letter_a)
 
@@ -149,6 +156,9 @@ class Turkish(TurkishClass):
             Ismin vasıta hali: -le, -la, -yle, -yla
         """
         self.apostrophes(**kwargs)
+
+        if self.n_connector():
+            self.concat('n')
 
         if self.last_letter_is_vowel():
             self.concat('y')
@@ -219,6 +229,9 @@ class Turkish(TurkishClass):
         return self.common_return()
 
     def privative(self, **kwargs):
+        if self.n_connector():
+            self.concat('n')
+
         self.concat(f's{self.minor()}z')
         return self.common_return()
 
