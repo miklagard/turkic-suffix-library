@@ -1,12 +1,10 @@
 Metadata-Version: 2.1
 Name: turkic-suffix-library
-Version: 0.1.0
+Version: 0.1.1
 Summary: Turkic suffix library
 Home-page: https://github.com/miklagard/turkic-suffix-library
 Author: Cem Yildiz, Oguzhan Moroglu, Sadullah Duman
 Author-email: cem.yildiz@ya.ru
-License: UNKNOWN
-Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -122,4 +120,3 @@ The most of the methods are not supported yet, under development
 ## Special thanks for C#, PHP and JavaScript versions
       Yasin Kuyu
       https://github.com/yasinkuyu/
-

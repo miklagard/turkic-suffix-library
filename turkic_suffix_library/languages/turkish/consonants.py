@@ -146,6 +146,7 @@ MAJOR_HAMONY_EXCEPTIONS = (
     'enternasyonal',
     'faal',
     'faul',
+    'festival',
     'final',
     'general',
     'glikol',
@@ -254,8 +255,14 @@ EXCEPTION_MISSING = {
     'boyun': 'boyn',
     'nesil': 'nesl',
     'koyun': 'koyn', # koyun (sheep) or koyun (bosom)? for koyun (sheep) there is no exception but for koyun (bosom) there is. aaaaargh turkish!!
-    'karın': 'karn' #same with this, karın (your wife) or karın (stomach)? for karın (your wife) there is not a such exception
+    'karın': 'karn', #same with this, karın (your wife) or karın (stomach)? for karın (your wife) there is not a such exception
     #katli, katle, katli etc. it doesn't really have a nominative case but only with suffixes?
+    'fasıl': 'fasl',
+    'nakit': 'nakt',
+    'alın': 'aln',
+    'şehir': 'şehr',
+    'izin': 'izn',
+    'vakit': 'vakt',
 }
 
 
