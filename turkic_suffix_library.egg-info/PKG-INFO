@@ -1,10 +1,10 @@
 Metadata-Version: 2.1
 Name: turkic-suffix-library
-Version: 0.1.2
+Version: 0.1.4
 Summary: Turkic suffix library
 Home-page: https://github.com/miklagard/turkic-suffix-library
 Author: Cem Yildiz, Oguzhan Moroglu, Sadullah Duman
-Author-email: cem.yildiz@ya.ru
+Author-email: cem.yildiz@proton.me
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent

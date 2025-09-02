@@ -1,11 +1,10 @@
-import inspect
 from turkic_suffix_library.languages.turkish.turkish_class import TurkishClass
 
 
 class Turkish(TurkishClass):
-    def common_return(self, **kwargs):
+    def common_return(self, action, **kwargs):
         self.history.append({
-            'action': inspect.stack()[1][3],
+            'action': action,
             'current': self.word,
             'proper_noun': self.proper_noun,
             'kwargs': kwargs
@@ -17,14 +16,16 @@ class Turkish(TurkishClass):
             history=self.history
         )
 
+    
     def plural(self, **kwargs):
         if self.n_connector():
             self.concat('n')
 
         self.concat(f'l{self.letter_a()}r')
 
-        return self.common_return(**kwargs)
+        return self.common_return('plural', **kwargs)
 
+    
     def accusative(self, **kwargs):
         """
             -i hali
@@ -45,7 +46,7 @@ class Turkish(TurkishClass):
 
         self.concat(self.minor())
 
-        return self.common_return()
+        return self.common_return('accusative', **kwargs)
 
     def dative(self, **kwargs):
         """
@@ -59,9 +60,9 @@ class Turkish(TurkishClass):
         self.apostrophes(**kwargs)
 
         if lower_word == 'ben' and not self.proper_noun:
-            self.word = self.from_upper_or_lower('bana')
+            self.replace_word('bana')
         elif lower_word == 'sen' and not self.proper_noun:
-            self.word = self.from_upper_or_lower('sana')
+            self.replace_word('sana')
         else:
             if not self.proper_noun or self.apostrophes_applied:
                 self.ng_change()
@@ -78,8 +79,9 @@ class Turkish(TurkishClass):
 
             self.concat(letter_a)
 
-        return self.common_return()
+        return self.common_return('dative', **kwargs)
 
+    
     def ablative(self, **kwargs):
         """
             -den hali
@@ -93,8 +95,8 @@ class Turkish(TurkishClass):
 
         self.concat(f'{self.letter_a()}n')
 
-        return self.common_return()
-
+        return self.common_return('ablative', **kwargs)
+    
     def locative(self, **kwargs):
         """
             -de hali
@@ -108,8 +110,9 @@ class Turkish(TurkishClass):
 
         self.concat(self.letter_a())
 
-        return self.common_return()
+        return self.common_return('locative', **kwargs)
 
+    
     def genitive(self, **kwargs):
         """
             Iyelik aitlik eki
@@ -134,7 +137,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'{self.minor()}n')
 
-        return self.common_return()
+        return self.common_return('genitive', **kwargs)
 
     def equalative(self, **kwargs):
         """
@@ -149,8 +152,8 @@ class Turkish(TurkishClass):
         self.if_ends_with_hard('ç', 'c')
         self.concat(letter_a)
 
-        return self.common_return(**{})
-
+        return self.common_return('equalative', **kwargs)
+    
     def instrumental(self, **kwargs):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
@@ -165,8 +168,8 @@ class Turkish(TurkishClass):
 
         self.concat(f'l{self.letter_a()}')
 
-        return self.common_return()
-
+        return self.common_return('instrumental', **kwargs)
+    
     def possessive(self, **kwargs):
         """
             Iyelik tamlanan eki
@@ -215,25 +218,26 @@ class Turkish(TurkishClass):
                 self.concat(f'n{self.minor()}z')
             else:
                 if self.lower(self.word) == 'ism':
-                    self.word = self.from_upper_or_lower('isim')
+                    self.replace_word(self.from_upper_or_lower('isim'))
 
                 self.concat(f'l{self.letter_a()}r')
                 self.concat(self.minor())
 
-        return self.common_return(person=person, plural=plural)
-
+        return self.common_return('possessive', **kwargs)
+    
     def relative_pronoun(self, **kwargs):
         self.genitive()
         self.concat('ki')
 
-        return self.common_return()
+        return self.common_return('relative_pronoun', **kwargs)
 
     def privative(self, **kwargs):
         if self.n_connector():
             self.concat('n')
 
         self.concat(f's{self.minor()}z')
-        return self.common_return()
+
+        return self.common_return('privative', **kwargs)
 
     def ordinal(self, **kwargs):
         """
@@ -253,8 +257,9 @@ class Turkish(TurkishClass):
 
         self.concat(f'nc{self.minor()}')
 
-        return self.common_return()
+        return self.common_return('ordinal', **kwargs)
 
+    
     def distributive(self, **kwargs):
         """
             Distributive numbers: One->One each, Two->Two each.
@@ -271,8 +276,9 @@ class Turkish(TurkishClass):
 
         self.concat(f'{ae}r')
 
-        return self.common_return()
+        return self.common_return('distributive', **kwargs)
 
+    
     def copula_present(self, **kwargs):
         """
             kedidir
@@ -283,8 +289,6 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
-
-        kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
         if negative:
             self.concat(' değil')
@@ -330,7 +334,7 @@ class Turkish(TurkishClass):
                 [3, True, f'{self.letter_d()}{self.minor()}r'],
             )
 
-        return self.common_return(**kwargs)
+        return self.common_return('copula_present', **kwargs)
 
     def copula_definite_past(self, **kwargs):
         """
@@ -341,8 +345,6 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
-
-        kwargs = {'person': 3, 'plural': plural, 'negative': negative, 'question': question}
 
         if negative:
             self.concat(' değil')
@@ -367,8 +369,9 @@ class Turkish(TurkishClass):
             [2, True, f'n{self.minor()}z'],
             )
 
-        return self.common_return(**kwargs)
+        return self.common_return('copula_definite_past', **kwargs)
 
+    
     def copula_indefinite_past(self, **kwargs):
         """
             kediymis
@@ -402,8 +405,9 @@ class Turkish(TurkishClass):
             [1, True, f'{self.minor()}z'],
             [2, True, f't{self.minor()}n{self.minor()}z'],
         )
-        return self.common_return(**kwargs)
+        return self.common_return('copula_indefinite_past', **kwargs)
 
+    
     def infinitive(self, **kwargs):
         """
             Mastar eki
@@ -421,8 +425,8 @@ class Turkish(TurkishClass):
         if kwargs.get('question', False):
             self.concat(f' m{self.minor()}')
 
-        return self.common_return(**kwargs)
-    
+        return self.common_return('infinitive', **kwargs)
+
     def present_continuous_simple(self, **kwargs):
         """
             Şimdiki zaman
@@ -440,7 +444,7 @@ class Turkish(TurkishClass):
             self.harden_verb()
 
             if self.last_letter_is_vowel():
-                self.word = self.word[:-1]
+                self.replace_last_letter()
                 self.concat(self.minor())
             else:
                 self.concat(self.minor())
@@ -450,7 +454,7 @@ class Turkish(TurkishClass):
             if not from_able:
                 self.concat('m')
             else:
-                self.word = self.word[:-1]
+                self.replace_last_letter()
 
             self.concat(minor)
 
@@ -478,7 +482,8 @@ class Turkish(TurkishClass):
                 [2, True, f's{self.minor()}n{self.minor()}z']
             )
 
-        return self.common_return(**kwargs)
+        return self.common_return('present_continuous_simple', **kwargs)
+
     
     def present_continuous_simple_alternative(self, **kwargs):
         """
@@ -495,7 +500,7 @@ class Turkish(TurkishClass):
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
 
-        self.word = self.infinitive().to_string()
+        self.replace_word(self.infinitive().to_string())
 
         self.concat(f't{letter_a}')
 
@@ -518,8 +523,8 @@ class Turkish(TurkishClass):
         if question and person == 3 and plural:
             self.concat(f' m{self.minor()}')
 
-        return self.common_return(**kwargs)
-    
+        return self.common_return('present_continuous_simple_alternative', **kwargs)
+
     def simple_tense(self, **kwargs):
         """
             Geniş zaman (aorist)
@@ -608,8 +613,9 @@ class Turkish(TurkishClass):
 
             )
 
-        return self.common_return(**kwargs)
+        return self.common_return('simple_tense', **kwargs)
 
+    
     def past_definite(self, **kwargs):
         """
             Past tense
@@ -648,7 +654,7 @@ class Turkish(TurkishClass):
 
             self.concat(f' m{minor}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_definite', **kwargs)
 
     def past_progressive_dubitative(self, **kwargs):
         person = kwargs.get('person', 3)
@@ -656,10 +662,10 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
         question = kwargs.get('question', False)
 
-        self.word = self.present_continuous_simple(
+        self.replace_word(self.present_continuous_simple(
             person=3,
             negative=negative,
-        ).to_string()
+        ).to_string())
 
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
@@ -670,23 +676,23 @@ class Turkish(TurkishClass):
 
         self.if_ends_with_vowel('y')
 
-        self.word = self.indefinite_past(
+        self.replace_word(self.indefinite_past(
             person=person,
             plural=plural
-        ).to_string()
+        ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_progressive_dubitative', **kwargs)
 
     def past_progressive_alternative_dubitative(self, **kwargs):
         person = kwargs.get('person', 3)
         plural = person == 3 and kwargs.get('plural', False)
 
-        self.word = self.present_continuous_simple_alternative(
+        self.replace_word(self.present_continuous_simple_alternative(
             person=3,
             plural=plural,
             question=kwargs.get('question', False),
             negative=kwargs.get('negative', False)
-        ).to_string()
+        ).to_string())
 
         self.if_ends_with_vowel('y')
 
@@ -695,12 +701,12 @@ class Turkish(TurkishClass):
         else:
             plural = kwargs.get('plural', False)
 
-        self.word = self.indefinite_past(
+        self.replace_word(self.indefinite_past(
             person=person,
             plural=plural
-        ).to_string()
+        ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_progressive_alternative_dubitative', **kwargs)
 
     def indefinite_past(self, **kwargs):
         """
@@ -744,20 +750,20 @@ class Turkish(TurkishClass):
                 [3, True, f'l{letter_a}r m{minor}']
             )
 
-        return self.common_return(**kwargs)
-
+        return self.common_return('indefinite_past', **kwargs)
+    
     def past_progressive_narrative(self, **kwargs):
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
         person = kwargs.get('person', 3)
         plural = kwargs.get('plural', False) and person == 3
 
-        self.word = self.present_continuous_simple(
+        self.replace_word(self.present_continuous_simple(
             person=3,
             negative=negative,
             question=question,
             plural=plural
-        ).to_string()
+        ).to_string())
 
         self.if_ends_with_vowel('y')
 
@@ -766,13 +772,13 @@ class Turkish(TurkishClass):
         else:
             plural = kwargs.get('plural', False)
 
-        self.word = self.past_definite(
+        self.replace_word(self.past_definite(
             person=person,
             plural=plural
-        ).to_string()
+        ).to_string())
 
-        return self.common_return(**kwargs)
-
+        return self.common_return('past_progressive_narrative', **kwargs)
+    
     def past_progressive_alternative_narrative(self, **kwargs):
         negative = kwargs.get('negative', False)
         question = kwargs.get('question', False)
@@ -781,12 +787,12 @@ class Turkish(TurkishClass):
 
         plural = person == 3 and plural
 
-        self.word = self.present_continuous_simple_alternative(
+        self.replace_word(self.present_continuous_simple_alternative(
             person=3,
             negative=negative,
             question=question,
             plural=plural
-        ).to_string()
+        ).to_string())
 
         plural = kwargs.get('plural', False)
 
@@ -795,12 +801,12 @@ class Turkish(TurkishClass):
 
         self.if_ends_with_vowel('y')
 
-        self.word = self.past_definite(
+        self.replace_word(self.past_definite(
             person=person,
             plural=plural
-        ).to_string()
+        ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_progressive_alternative_narrative', **kwargs)
 
     def past_perfect_narrative(self, **kwargs):
         negative = kwargs.get('negative', False)
@@ -809,12 +815,12 @@ class Turkish(TurkishClass):
         plural = kwargs.get('plural', False)
 
         plural = person == 3 and plural
-        self.word = self.indefinite_past(
+        self.replace_word(self.indefinite_past(
             person=3,
             plural=plural,
             negative=negative,
             question=question
-        ).to_string()
+        ).to_string())
 
         self.if_ends_with_vowel('y')
 
@@ -826,12 +832,12 @@ class Turkish(TurkishClass):
 
             self.concat(f'{letter_d}{self.minor()}')
         else:
-            self.word = self.past_definite(
+            self.replace_word(self.past_definite(
                 person=person,
                 plural=plural
-            ).to_string()
+            ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_perfect_narrative', **kwargs)
 
     def doubtful_distant_past(self, **kwargs):
         """
@@ -841,14 +847,14 @@ class Turkish(TurkishClass):
             Duymuş mumuymuşsunuz Duymuşlar mıymış?
         """
 
-        self.word = self.indefinite_past(negative=kwargs.get('negative', False)).to_string()
+        self.replace_word(self.indefinite_past(negative=kwargs.get('negative', False)).to_string())
 
         if not kwargs.get('question', False):
-            self.word = self.indefinite_past(
+            self.replace_word(self.indefinite_past(
                 person=kwargs.get('person', 3),
                 plural=kwargs.get('plural', False),
                 question=kwargs.get('question', False)
-            ).to_string()
+            ).to_string())
         else:
             if kwargs.get('person', 3) == 3 and kwargs.get('plural', False):
                 self.concat(f'l{self.letter_a()}r')
@@ -858,28 +864,28 @@ class Turkish(TurkishClass):
             else:
                 minor = self.minor()
                 self.concat(f' m{minor}y')
-                self.word = self.indefinite_past(
+                self.replace_word(self.indefinite_past(
                     person=kwargs.get('person', 3),
                     plural=kwargs.get('plural', False)
-                ).to_string()
+                ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('doubtful_distant_past', **kwargs)
 
     def past_in_the_future(self, **kwargs):
-        self.word = self.indefinite_past(
+        self.replace_word(self.indefinite_past(
             person=3,
             question=kwargs.get('question', False),
             negative=kwargs.get('negative', False)
-        ).to_string()
+        ).to_string())
 
         self.concat(' ol')
 
-        self.word = self.future_simple(
+        self.replace_word(self.future_simple(
             person=kwargs.get('person', 3),
             plural=kwargs.get('plural', False)
-        ).to_string()
+        ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_in_the_future', **kwargs)
 
     def simple_conditional_narrative(self, **kwargs):
         person = kwargs.get('person', 3)
@@ -905,7 +911,7 @@ class Turkish(TurkishClass):
             [2, True, f'n{self.letter_i()}z'],
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('simple_conditional_narrative', **kwargs)
 
     def past_conditional_dubitative(self, **kwargs):
         letter_a = self.letter_a()
@@ -937,7 +943,7 @@ class Turkish(TurkishClass):
             [2, True, f's{letter_i}n{letter_i}z'],
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_conditional_dubitative', **kwargs)
 
     def future_simple(self, **kwargs):
         """
@@ -990,7 +996,7 @@ class Turkish(TurkishClass):
                 [3, True, f'{letter_a}c{letter_a}kl{letter_a}r']
             )
 
-        return self.common_return(**kwargs)
+        return self.common_return('future_simple', **kwargs)
 
     def future_in_the_past(self, **kwargs):
         """
@@ -1031,13 +1037,13 @@ class Turkish(TurkishClass):
             [3, True, f'{letter_i}']
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('future_in_the_past', **kwargs)
 
     def future_dubitative(self, **kwargs):
         """
             süzecekmişim
         """
-        self.word = self.future_simple(negative=kwargs.get('negative', False)).to_string()
+        self.replace_word(self.future_simple(negative=kwargs.get('negative', False)).to_string())
 
         person = kwargs.get('person', 3)
         plural = kwargs.get('plural', False)
@@ -1068,7 +1074,7 @@ class Turkish(TurkishClass):
             [2, True, f'{letter_i}n{letter_i}z'],
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('future_dubitative', **kwargs)
 
     def future_conditional(self, **kwargs):
         person = kwargs.get('person', 3)
@@ -1096,7 +1102,7 @@ class Turkish(TurkishClass):
         if kwargs.get('question', False):
             self.concat(f' m{letter_i}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('future_conditional', **kwargs)
 
     def unify_verbs(self, **kwargs):
         """
@@ -1129,7 +1135,7 @@ class Turkish(TurkishClass):
 
                 self.concat(kwargs.get('auxiliary'))
 
-        return self.common_return(**kwargs)
+        return self.common_return('unify_verbs', **kwargs)
 
     def necessitative_mood(self, **kwargs):
         letter_a = self.letter_a()
@@ -1140,7 +1146,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'm{letter_a}l{letter_i}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('necessitative_mood', **kwargs)
 
     def necessitative_mood_simple_tense(self, **kwargs):
         """
@@ -1169,7 +1175,7 @@ class Turkish(TurkishClass):
             [2, True, f's{letter_i}n{letter_i}z'],
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('necessitative_mood_simple_tense', **kwargs)
 
     def necessitative_past_narrative(self, **kwargs):
         """
@@ -1202,7 +1208,7 @@ class Turkish(TurkishClass):
             [2, True, f'n{letter_i}z'],
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('necessitative_past_narrative', **kwargs)
 
     def necessitative_past_dubitative(self, **kwargs):
         """
@@ -1234,7 +1240,7 @@ class Turkish(TurkishClass):
             [2, True, f's{letter_i}n{letter_i}z']
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('necessitative_past_dubitative', **kwargs)
 
     def imperative_mood(self, **kwargs):
         """
@@ -1290,7 +1296,7 @@ class Turkish(TurkishClass):
             if question:
                 self.concat(f' m{self.minor()}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('imperative_mood', **kwargs)
 
     def conditional_mood_simple_tense(self, **kwargs):
         """
@@ -1319,7 +1325,7 @@ class Turkish(TurkishClass):
         if kwargs.get('question', False):
             self.concat(f' m{letter_i}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('conditional_mood_simple_tense', **kwargs)
 
     def subjunctive_mood_simple_tense(self, **kwargs):
         """
@@ -1360,7 +1366,7 @@ class Turkish(TurkishClass):
         if kwargs.get('question', False):
             self.concat(f' m{letter_i}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('subjunctive_mood_simple_tense', **kwargs)
 
     def past_definite_narrative(self, **kwargs):
         """
@@ -1395,12 +1401,12 @@ class Turkish(TurkishClass):
         if person == 3 and plural:
             plural = False
 
-        self.word = self.past_definite(
+        self.replace_word(self.past_definite(
             person=person,
             plural=plural
-        ).to_string()
+        ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_definite_narrative', **kwargs)
 
     def indefinite_past_reportative(self, **kwargs):
         person = kwargs.get('person', 3)
@@ -1445,7 +1451,7 @@ class Turkish(TurkishClass):
                 plural=plural
             )
 
-        return self.common_return(**kwargs)
+        return self.common_return('indefinite_past_reportative', **kwargs)
 
     def definite_past_reportative(self, **kwargs):
         person = kwargs.get('person', 3)
@@ -1484,8 +1490,7 @@ class Turkish(TurkishClass):
             plural=plural,
         )
 
-        return self.common_return(**kwargs)
-
+        return self.common_return('definite_past_reportative', **kwargs)
 
     def past_indefinite_past(self, **kwargs):
         """
@@ -1495,35 +1500,36 @@ class Turkish(TurkishClass):
         """
 
         person = kwargs.get('person', 3)
-        plural = kwargs.get('plural', 3)
         question = kwargs.get('question', False)
         negative = kwargs.get('negative', False)
 
+        plural = kwargs.get('plural', False)
+
         if person == 3 and plural and question:
-            self.word = self.indefinite_past(
+            self.replace_word(self.indefinite_past(
                 negative=negative,
                 question=question,
                 person=3,
                 plural=plural
-            ).to_string()
+            ).to_string())
         else:
-            self.word = self.indefinite_past(
+            self.replace_word(self.indefinite_past(
                 negative=negative,
                 question=question,
                 person=3
-            ).to_string()
+            ).to_string())
 
         self.if_ends_with_vowel('y')
 
         if person == 3 and plural and question:
-            self.word = self.past_definite(person=person).to_string()
+            self.replace_word(self.past_definite(person=person).to_string())
         else:
-            self.word = self.past_definite(
+            self.replace_word(self.past_definite(
                 person=person,
                 plural=plural
-            ).to_string()
+            ).to_string())
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_indefinite_past', **kwargs)
 
     def indefinite_past_future(self, **kwargs):
         """
@@ -1540,10 +1546,10 @@ class Turkish(TurkishClass):
         if self.is_from_passive():
             negative = False
 
-        self.word = self.future_simple(
+        self.replace_word(self.future_simple(
             negative=negative,
             person=3,
-        ).to_string()
+        ).to_string())
 
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
@@ -1564,7 +1570,7 @@ class Turkish(TurkishClass):
             [2, True, f's{i}n{i}z']
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('indefinite_past_future', **kwargs)
 
     def past_future(self, **kwargs):
         """
@@ -1578,21 +1584,21 @@ class Turkish(TurkishClass):
         question = kwargs.get('question', False)
 
         if person == 3 and plural and question:
-            self.word = self.future_simple(
+            self.replace_word(self.future_simple(
                 negative=kwargs.get('negative', False),
                 question=kwargs.get('question', False),
                 person=kwargs.get('person', 3),
                 plural=kwargs.get('plural', False)
-            ).to_string()
+            ).to_string())
         else:
-            self.word = self.future_simple(
+            self.replace_word(self.future_simple(
                 negative=kwargs.get('negative', False),
                 question=kwargs.get('question', False)
-            ).to_string()
+            ).to_string())
 
         if person == 3 and plural and question:
             self.concat('y')
-            self.word = self.past_definite(person=kwargs.get('person', 3)).to_string()
+            self.replace_word(self.past_definite(person=kwargs.get('person', 3)).to_string())
         else:
             if kwargs.get('question', False):
                 self.concat('y')
@@ -1602,7 +1608,7 @@ class Turkish(TurkishClass):
                 plural=kwargs.get('plural', False)
             ).to_string()
 
-        return self.common_return(**kwargs)
+        return self.common_return('past_future', **kwargs)
 
     def passive(self, **kwargs):
         """
@@ -1632,7 +1638,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'{minor}l')
 
-        return self.common_return(**kwargs)
+        return self.common_return('passive', **kwargs)
     
     def adverb_during_action(self, **kwargs):
         """
@@ -1654,7 +1660,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'ken')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_during_action', **kwargs)
     
     def adverb_continuity(self, **kwargs):
         """
@@ -1678,9 +1684,9 @@ class Turkish(TurkishClass):
 
         self.concat(ae)
 
-        self.word = f'{self.word} {self.word}'
+        self.replace_word(f'{self.word} {self.word}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_continuity', **kwargs)
 
     def adverb_repeatedly(self, **kwargs):
         """
@@ -1690,15 +1696,15 @@ class Turkish(TurkishClass):
         """
         ae = self.letter_a()
 
-        self.word = self.past_definite(
+        self.replace_word(self.past_definite(
             negative=kwargs.get('negative', False),
             person=1,
             plural=True
-        ).to_string()
+        ).to_string())
 
         self.concat(f'ç{ae}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_repeatedly', **kwargs)
 
     def adverb_after_action(self, **kwargs):
         """
@@ -1728,7 +1734,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'nc{ae}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_after_action', **kwargs)
 
     def adverb_after_action_alternative(self, **kwargs):
         """
@@ -1756,7 +1762,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'{minor}p')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_after_action_alternative', **kwargs)
 
     def adverb_without_action(self, **kwargs):
         """
@@ -1776,7 +1782,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'd{ae}n')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_without_action', **kwargs)
 
     def adverb_without_action_alternative(self, **kwargs):
         """
@@ -1791,7 +1797,7 @@ class Turkish(TurkishClass):
         self.word = self.infinitive().to_string()
         self.concat(f's{letter_i}z{letter_i}n')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_without_action_alternative', **kwargs)
 
     def adverb_by_action(self, **kwargs):
         """
@@ -1816,7 +1822,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'{ae}r{ae}k')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_by_action', **kwargs)
     
     def adverb_since_action(self, **kwargs):
         """
@@ -1842,7 +1848,7 @@ class Turkish(TurkishClass):
 
         self.concat(f'{ae}l{letter_i}')
 
-        return self.common_return(**kwargs)
+        return self.common_return('adverb_since_action', **kwargs)
 
     def simple_tense_past_definite(self, **kwargs):
         """
@@ -1874,7 +1880,7 @@ class Turkish(TurkishClass):
             plural=plural,
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('simple_tense_past_definite', **kwargs)
 
     def simple_tense_indefinite_past(self, **kwargs):
         """
@@ -1906,4 +1912,4 @@ class Turkish(TurkishClass):
             plural=plural,
         )
 
-        return self.common_return(**kwargs)
+        return self.common_return('simple_tense_indefinite_past', **kwargs)

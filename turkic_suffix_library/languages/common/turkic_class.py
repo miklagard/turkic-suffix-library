@@ -78,3 +78,11 @@ class TurkicClass:
         self.word = self.word[0:len(self.word) - 1] + new_last_letter
 
         return self.word
+
+
+    def replace_word(self, new_word):
+        self.word = self.from_upper_or_lower(new_word)
+
+
+    def replace_last_letter(self):
+        self.word = self.word[:-1]
