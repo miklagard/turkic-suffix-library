@@ -334,6 +334,7 @@ VERB_MINOR_HARMONY_EXCEPTIONS = (
     'öl',
     'var',
     'ver',
+    'vur'
 )
 
 NON_T_D_CHANGE_VERBS = (

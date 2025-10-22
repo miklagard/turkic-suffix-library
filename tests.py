@@ -201,6 +201,13 @@ class Verb(unittest.TestCase):
             'alınılmıyorsun'
         )
 
+    def test_simple_tense(self):
+        self.assertEqual(
+            Turkish('vur').simple_tense(person=3, negative=False).to_string(),
+            'vurur'
+
+        )
+
     def test_present_continuous_simple(self):
         self.assertEqual(
             Turkish('ye').present_continuous_simple(person=2).to_string(),
