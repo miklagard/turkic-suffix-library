@@ -335,3 +335,20 @@ VERB_MINOR_HARMONY_EXCEPTIONS = (
     'var',
     'ver',
 )
+
+NON_T_D_CHANGE_VERBS = (
+    'bellet',
+    'denet',
+    'döşet',
+    'ilet',
+    'işit',
+    'işlet',
+    'öğret',
+    'özet',
+    'gözet',
+    'tüket',
+    'türet',
+    'söylet',
+    'üret',
+    'yönet',
+)

@@ -16,16 +16,21 @@ class Turkish(TurkishClass):
             history=self.history
         )
 
-    
+
     def plural(self, **kwargs):
         if self.n_connector():
             self.concat('n')
 
-        self.concat(f'l{self.letter_a()}r')
+        if self.word.lower() == 'ben':
+            self.word = 'biz'
+        elif self.word.lower() == 'sen':
+            self.word = 'siz'
+        else:
+            self.concat(f'l{self.letter_a()}r')
 
         return self.common_return('plural', **kwargs)
 
-    
+
     def accusative(self, **kwargs):
         """
             -i hali
@@ -81,7 +86,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('dative', **kwargs)
 
-    
+
     def ablative(self, **kwargs):
         """
             -den hali
@@ -96,7 +101,7 @@ class Turkish(TurkishClass):
         self.concat(f'{self.letter_a()}n')
 
         return self.common_return('ablative', **kwargs)
-    
+
     def locative(self, **kwargs):
         """
             -de hali
@@ -112,7 +117,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('locative', **kwargs)
 
-    
+
     def genitive(self, **kwargs):
         """
             Iyelik aitlik eki
@@ -135,7 +140,10 @@ class Turkish(TurkishClass):
             if last_letter_is_vowel:
                 self.concat('n')
 
-        self.concat(f'{self.minor()}n')
+        if self.word.lower() == 'ben':
+            self.word = 'benim'
+        else:
+            self.concat(f'{self.minor()}n')
 
         return self.common_return('genitive', **kwargs)
 
@@ -153,7 +161,7 @@ class Turkish(TurkishClass):
         self.concat(letter_a)
 
         return self.common_return('equalative', **kwargs)
-    
+
     def instrumental(self, **kwargs):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
@@ -169,7 +177,7 @@ class Turkish(TurkishClass):
         self.concat(f'l{self.letter_a()}')
 
         return self.common_return('instrumental', **kwargs)
-    
+
     def possessive(self, **kwargs):
         """
             Iyelik tamlanan eki
@@ -188,10 +196,13 @@ class Turkish(TurkishClass):
 
         if not plural:
             if person == 1:
-                if not self.last_letter_is_vowel():
-                    self.concat(self.minor())
+                if self.word.lower('ben'):
+                    self.word = 'benim'
+                else:
+                    if not self.last_letter_is_vowel():
+                        self.concat(self.minor())
 
-                self.concat('m')
+                    self.concat('m')
 
             elif person == 2:
                 if not self.last_letter_is_vowel():
@@ -206,25 +217,34 @@ class Turkish(TurkishClass):
                 self.concat(self.minor())
         else:
             if person == 1:
-                if not self.last_letter_is_vowel():
-                    self.concat(self.minor())
+                if self.word.lower == 'ben':
+                    self.word = 'bizim'
+                else:
+                    if not self.last_letter_is_vowel():
+                        self.concat(self.minor())
 
-                self.concat(f'm{self.minor()}z')
+                    self.concat(f'm{self.minor()}z')
 
             elif person == 2:
-                if not self.last_letter_is_vowel():
-                    self.concat(self.minor())
+                if self.word.lower() == 'sen':
+                    self.word = 'sizi'
+                else:
+                    if not self.last_letter_is_vowel():
+                        self.concat(self.minor())
 
-                self.concat(f'n{self.minor()}z')
+                    self.concat(f'n{self.minor()}z')
             else:
-                if self.lower(self.word) == 'ism':
-                    self.replace_word(self.from_upper_or_lower('isim'))
+                if self.word.lower() == 'ben':
+                    self.word = 'bizi'
+                else:
+                    if self.lower(self.word) == 'ism':
+                        self.replace_word(self.from_upper_or_lower('isim'))
 
                 self.concat(f'l{self.letter_a()}r')
                 self.concat(self.minor())
 
         return self.common_return('possessive', **kwargs)
-    
+
     def relative_pronoun(self, **kwargs):
         self.genitive()
         self.concat('ki')
@@ -259,7 +279,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('ordinal', **kwargs)
 
-    
+
     def distributive(self, **kwargs):
         """
             Distributive numbers: One->One each, Two->Two each.

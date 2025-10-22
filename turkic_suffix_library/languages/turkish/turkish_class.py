@@ -15,6 +15,13 @@ class TurkishClass(TurkicClass):
         self.language = 'turkish'
 
     def make_plural(self):
+        if self.word.lower() == 'ben':
+            return 'biz'
+        elif self.word.lower() == 'sen':
+            return 'siz'
+        elif self.word.lower() == 'o':
+            return 'onlar'
+
         self.concat(f'l{self.letter_a()}r')
 
         return self.word
@@ -56,6 +63,9 @@ class TurkishClass(TurkicClass):
 
     def last_letter(self):
         return tr.last_letter(self.last_word())
+
+    def is_non_t_d_change_verb(self):
+        return self.word.lower() in con.NON_T_D_CHANGE_VERBS
 
     def last_letter_is_vowel(self):
         return self.last_letter().get('letter') in con.VOWELS
@@ -130,7 +140,7 @@ class TurkishClass(TurkicClass):
         lower = self.lower(self.word)
 
         for hard in con.VERBS_HARDEN:
-            if lower.endswith(hard):
+            if lower.endswith(hard) and not self.is_non_t_d_change_verb():
                 self.word = tr.concat(
                     self.word[:-len(hard)], con.VERBS_HARDEN[hard]
                 )

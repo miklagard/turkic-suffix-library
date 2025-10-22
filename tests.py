@@ -141,6 +141,16 @@ class Noun(unittest.TestCase):
 
     def test_possessive(self):
         self.assertEqual(
+            Turkish('ben').plural(proper_noun=False).to_string(),
+            'biz'
+        )
+
+        self.assertEqual(
+            Turkish('sen').plural(proper_noun=False).to_string(),
+            'siz'
+        )
+
+        self.assertEqual(
             Turkish('aparat').possessive(person=2).to_string(),
             'aparatın'
         )
@@ -195,6 +205,16 @@ class Verb(unittest.TestCase):
         self.assertEqual(
             Turkish('ye').present_continuous_simple(person=2).to_string(),
             'yiyorsun'
+        )
+
+        self.assertEqual(
+            Turkish('yönet').present_continuous_simple(person=2).to_string(),
+            'yönetiyorsun'
+        )
+
+        self.assertEqual(
+            Turkish('sabret').present_continuous_simple(person=2).to_string(),
+            'sabrediyorsun'
         )
 
 
