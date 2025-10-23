@@ -196,7 +196,7 @@ class Turkish(TurkishClass):
 
         if not plural:
             if person == 1:
-                if self.word.lower('ben'):
+                if self.word.lower() == 'ben':
                     self.word = 'benim'
                 else:
                     if not self.last_letter_is_vowel():
