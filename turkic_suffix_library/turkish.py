@@ -93,12 +93,14 @@ class Turkish(TurkishClass):
         """
         self.apostrophes(**kwargs)
 
+        letter_a = self.letter_a()
+
         if self.n_connector():
             self.concat('n')
 
         self.if_ends_with_hard('t', 'd')
 
-        self.concat(f'{self.letter_a()}n')
+        self.concat(f'{letter_a}n')
 
         return self.common_return('ablative', **kwargs)
 
@@ -106,6 +108,8 @@ class Turkish(TurkishClass):
         """
             -de hali
         """
+        letter_a = self.letter_a()
+
         self.apostrophes(**kwargs)
 
         if self.n_connector():
@@ -113,7 +117,7 @@ class Turkish(TurkishClass):
 
         self.if_ends_with_hard('t', 'd')
 
-        self.concat(self.letter_a())
+        self.concat(letter_a)
 
         return self.common_return('locative', **kwargs)
 
