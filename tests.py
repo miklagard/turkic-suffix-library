@@ -127,6 +127,16 @@ class Noun(unittest.TestCase):
             'ecdadı'
         )
 
+        self.assertEqual(
+            Turkish('gök').accusative().to_string(),
+            'göğü'
+        )
+
+        self.assertEqual(
+            Turkish('kök').accusative().to_string(),
+            'kökü'
+        )
+
     def test_instrumental(self):
         self.assertEqual(
             Turkish('kedi').instrumental().to_string(),

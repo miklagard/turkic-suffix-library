@@ -353,3 +353,25 @@ NON_T_D_CHANGE_VERBS = (
     'üret',
     'yönet',
 )
+
+
+"""
+    tek -> teki
+    kök -> kökü
+    kat -> katı
+    
+    but:
+    
+    çok -> coĞu
+    tat -> tadı
+    kap -> kabı
+"""
+SOFTEN_SINGLE_SYLLABLE_NOUNS = (
+    'gök',
+    'çok',
+    'yok',
+    'but',
+    'tat',
+    'güç',
+    'kap'
+)
