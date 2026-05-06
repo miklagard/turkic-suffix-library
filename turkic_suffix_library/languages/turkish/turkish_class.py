@@ -12,9 +12,9 @@ class TurkishClass(TurkicClass):
                 'action': 'possessive'
             })
 
-        self.language = 'turkish'
+        self.language:str = 'turkish'
 
-    def make_plural(self):
+    def make_plural(self) -> str:
         if self.word.lower() == 'ben':
             return 'biz'
         elif self.word.lower() == 'sen':
@@ -26,7 +26,7 @@ class TurkishClass(TurkicClass):
 
         return self.word
 
-    def apostrophes(self, **kwargs):
+    def apostrophes(self, **kwargs) -> bool:
         self.proper_noun = kwargs.get('proper_noun')
 
         if self.proper_noun and not self.apostrophes_applied:
@@ -37,61 +37,61 @@ class TurkishClass(TurkicClass):
         else:
             return False
 
-    def last_vowel(self):
+    def last_vowel(self) -> dict:
         return tr.last_vowel(self.word)
 
-    def letter_d(self):
+    def letter_d(self) -> str:
         if self.last_letter_is_vowel() or not self.last_letter_is_hard():
             return 'd'
         else:
             return 't'
 
-    def letter_a(self):
+    def letter_a(self) -> str:
         if self.last_vowel().get('tone') == 'front':
             return 'a'
         else:
             return 'e'
 
-    def minor(self):
+    def minor(self) -> str:
         return con.MINOR_HARMONY.get(self.last_vowel().get('letter'), 'a')
 
-    def letter_i(self):
+    def letter_i(self) -> str:
         if self.last_vowel().get('tone') == 'front':
             return 'ı'
         else:
             return 'i'
 
-    def last_letter(self):
+    def last_letter(self) -> dict:
         return tr.last_letter(self.last_word())
 
-    def is_non_t_d_change_verb(self):
+    def is_non_t_d_change_verb(self) -> bool:
         return self.word.lower() in con.NON_T_D_CHANGE_VERBS
 
-    def last_letter_is_vowel(self):
+    def last_letter_is_vowel(self) -> bool:
         return self.last_letter().get('letter') in con.VOWELS
 
-    def last_letter_is_hard(self):
+    def last_letter_is_hard(self) -> bool:
         return self.last_letter().get('letter') in con.HARD_CONSONANTS
 
-    def if_ends_with_hard(self, concat_1, concat_2):
+    def if_ends_with_hard(self, concat_1:str, concat_2:str) -> None:
         if self.last_letter_is_hard():
             self.concat(concat_1)
         else:
             self.concat(concat_2)
 
-    def if_ends_with_vowel(self, concat_text):
+    def if_ends_with_vowel(self, concat_text:str) -> None:
         if self.last_letter_is_vowel():
             self.concat(concat_text)
 
-    def soften(self):
+    def soften(self) -> str:
         self.word = tr.soften(self.word)
         return self.word
 
-    def exception_missing(self):
+    def exception_missing(self) -> str:
         self.word = tr.exception_missing(self.word)
         return self.word
 
-    def is_from_able(self):
+    def is_from_able(self) -> bool:
         if len(self.history):
             action = self.history[-1].get('action')
             auxiliary = self.history[-1].get('kwargs', {}).get('auxiliary')
@@ -101,7 +101,7 @@ class TurkishClass(TurkicClass):
 
         return False
 
-    def is_from_passive(self):
+    def is_from_passive(self) -> bool:
         if len(self.history):
             action = self.history[-1].get('action')
 
@@ -110,8 +110,8 @@ class TurkishClass(TurkicClass):
 
         return False
 
-    def ng_change(self):
-        word = self.last_word()
+    def ng_change(self) -> str:
+        word:str = self.last_word()
 
         for noun in con.NK_G_CHANGE:
             if word.endswith(noun):
@@ -120,24 +120,24 @@ class TurkishClass(TurkicClass):
 
         return self.word
 
-    def change_last_letter(self, letter):
+    def change_last_letter(self, letter) -> str:
         self.word = tr.change_last_letter(self.word, letter)
         return self.word
 
     def ends_with(self, letter):
         return self.last_letter().get('letter') == letter
 
-    def if_ends_with(self, old_letter, new_letter):
+    def if_ends_with(self, old_letter, new_letter) -> None:
         if self.ends_with(old_letter):
             self.change_last_letter(new_letter)
 
-    def verb_in_minor_harmony_exception(self):
-        word = self.last_word()
+    def verb_in_minor_harmony_exception(self) -> bool:
+        word:str = self.last_word()
 
         return word in con.VERB_MINOR_HARMONY_EXCEPTIONS
 
-    def harden_verb(self):
-        lower = self.lower(self.word)
+    def harden_verb(self) -> str:
+        lower:str = self.lower(self.word)
 
         for hard in con.VERBS_HARDEN:
             if lower.endswith(hard) and not self.is_non_t_d_change_verb():
@@ -147,36 +147,36 @@ class TurkishClass(TurkicClass):
 
         return self.word
 
-    def if_verb_losing_vowel(self):
+    def if_verb_losing_vowel(self) -> bool:
         if con.VERBS_LOSING_VOWELS.get(self.lower(self.word), None):
             return True
         else:
             return False
 
-    def verbs_losing_vowels(self):
+    def verbs_losing_vowels(self) -> str:
         self.word = self.from_upper_or_lower(
             con.VERBS_LOSING_VOWELS.get(self.lower(self.word), self.word)
         )
         return self.word
 
-    def n_connector(self):
+    def n_connector(self) -> bool:
         if self.history:
             if self.history[-1].get('action') == 'possessive':
                 return True
 
         return self.lower(self.word) in con.N_CONNECTOR
 
-    def harmony_for_present(self):
+    def harmony_for_present(self) -> str:
         vowel = self.lower(self.last_vowel()['letter'])
 
         return con.HARMONY_FOR_PRESENT.get(vowel, vowel)
 
-    def harmony_for_present_first(self):
+    def harmony_for_present_first(self) -> str:
         vowel = self.lower(self.last_vowel()['letter'])
 
         return con.HARMONY_FOR_PRESENT_FIRST.get(vowel, vowel)
 
-    def count_syllable(self):
+    def count_syllable(self) -> int:
         vowel = self.last_vowel()
 
         return vowel['vowel_count']

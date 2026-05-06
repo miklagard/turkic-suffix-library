@@ -1,4 +1,4 @@
-VERBS = [
+VERBS:tuple = (
     'aç',
     'ağla',
     'ak',
@@ -175,4 +175,4 @@ VERBS = [
     'ye',
     'yüksel',
     'yürü',
-]
+)

@@ -1,16 +1,16 @@
-VOWELS = 'aıoöuüei'
-FRONT_VOWELS = 'aıou'
-BACK_VOWELS = 'eiöü'
+VOWELS:str = 'aıoöuüei'
+FRONT_VOWELS:str = 'aıou'
+BACK_VOWELS:str = 'eiöü'
 
-HARD_CONSONANTS = 'fstkçşhp'
+HARD_CONSONANTS:str = 'fstkçşhp'
 
-DISCONTINUOUS_HARD_CONSONANTS = 'pçtk'
-SOFTEN_DHC = 'bcdğ'
+DISCONTINUOUS_HARD_CONSONANTS:str = 'pçtk'
+SOFTEN_DHC:str = 'bcdğ'
 
-DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX = 'pçk'
-SOFTEN_DHC_AFTER_SUFFIX = 'bcğ'
+DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX:str = 'pçk'
+SOFTEN_DHC_AFTER_SUFFIX:str = 'bcğ'
 
-MINOR_HARMONY = {
+MINOR_HARMONY:dict = {
     'a': 'ı',
     'e': 'i',
     'ö': 'ü',
@@ -21,7 +21,7 @@ MINOR_HARMONY = {
     'ü': 'ü'
 }
 
-HARMONY_FOR_PRESENT_FIRST = {
+HARMONY_FOR_PRESENT_FIRST:dict = {
     'a': 'a',
     'e': 'e',
     'ö': 'e',
@@ -32,7 +32,7 @@ HARMONY_FOR_PRESENT_FIRST = {
     'ü': 'e'
 }
 
-HARMONY_FOR_PRESENT = {
+HARMONY_FOR_PRESENT:dict = {
     'e': 'i',
     'i': 'e',
     'ö': 'ü',
@@ -49,7 +49,7 @@ HARMONY_FOR_PRESENT = {
 # If the loaned word is coming from Arabic and if the last letter is Arabic d,
 # and it gets a suffix starting with a vowel, -t turns into -d again.
 # Source: Sevan Nisanyan
-ARABIC_T = (
+ARABIC_T:tuple = (
     'armut',
     'ait',
     'cedit',
@@ -95,7 +95,7 @@ ARABIC_T = (
 # eg. börek + i = böreği (standard Turkish word behaviour)
 #     merak + ı = merakı (Arabic-loaned word exception)
 # Source: Sevan Nisanyan
-ARABIC_K = (
+ARABIC_K:tuple = (
     'hakkak',
     'halik',
     'idrak',
@@ -124,7 +124,7 @@ ARABIC_K = (
 
 # The exception words which has non-Turkish origins don't fit for standard Turkish Major Vowel Harmony
 # because of the vocal difference which doesn't exist in Turkish.
-MAJOR_HAMONY_EXCEPTIONS = (
+MAJOR_HAMONY_EXCEPTIONS:tuple = (
     'abajur',
     'ahval',
     'akropol',
@@ -247,7 +247,7 @@ MAJOR_HAMONY_EXCEPTIONS = (
 )
 
 
-EXCEPTION_MISSING = {
+EXCEPTION_MISSING:dict = {
     'ağız': 'ağz',
     'isim': 'ism',
     'kasır': 'kasr',
@@ -272,24 +272,24 @@ EXCEPTION_MISSING = {
     'kadir': 'kadr',
 }
 
-N_CONNECTOR = [
+N_CONNECTOR:tuple = (
     'o', 'bu', 'şu'
-]
+)
 
 # de + iyorum = diyorum
-VERBS_LOSING_VOWELS = {
+VERBS_LOSING_VOWELS:dict = {
     'ye': 'yi',
     'de': 'di'
 }
 
 # git -> gider, sat -> satar
-VERBS_HARDEN = {
+VERBS_HARDEN:dict = {
     'git': 'gid',
     'et': 'ed'
 }
 
 # K -> G change in some nouns ending with -nk (not all of them, for instance: link, bank)
-NK_G_CHANGE = {
+NK_G_CHANGE:dict = {
     'renk': 'reng',
     'frank': 'frang',
     'frenk': 'freng',
@@ -322,7 +322,7 @@ NK_G_CHANGE = {
 
 # sererim, silerim (e)
 # veririm, gelirim, bilirim (i)
-VERB_MINOR_HARMONY_EXCEPTIONS = (
+VERB_MINOR_HARMONY_EXCEPTIONS:tuple = (
     'al',
     'bil',
     'bul',
@@ -337,7 +337,7 @@ VERB_MINOR_HARMONY_EXCEPTIONS = (
     'vur'
 )
 
-NON_T_D_CHANGE_VERBS = (
+NON_T_D_CHANGE_VERBS:tuple = (
     'bellet',
     'denet',
     'döşet',
@@ -366,7 +366,7 @@ NON_T_D_CHANGE_VERBS = (
     tat -> tadı
     kap -> kabı
 """
-SOFTEN_SINGLE_SYLLABLE_NOUNS = (
+SOFTEN_SINGLE_SYLLABLE_NOUNS:tuple = (
     'gök',
     'çok',
     'yok',
