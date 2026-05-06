@@ -1,16 +1,16 @@
-VOWELS:str = 'aıoöuüei'
-FRONT_VOWELS:str = 'aıou'
-BACK_VOWELS:str = 'eiöü'
+VOWELS: str = 'aıoöuüei'
+FRONT_VOWELS: str = 'aıou'
+BACK_VOWELS: str = 'eiöü'
 
-HARD_CONSONANTS:str = 'fstkçşhp'
+HARD_CONSONANTS: str = 'fstkçşhp'
 
-DISCONTINUOUS_HARD_CONSONANTS:str = 'pçtk'
-SOFTEN_DHC:str = 'bcdğ'
+DISCONTINUOUS_HARD_CONSONANTS: str = 'pçtk'
+SOFTEN_DHC: str = 'bcdğ'
 
-DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX:str = 'pçk'
-SOFTEN_DHC_AFTER_SUFFIX:str = 'bcğ'
+DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX: str = 'pçk'
+SOFTEN_DHC_AFTER_SUFFIX: str = 'bcğ'
 
-MINOR_HARMONY:dict = {
+MINOR_HARMONY: dict = {
     'a': 'ı',
     'e': 'i',
     'ö': 'ü',
@@ -21,7 +21,7 @@ MINOR_HARMONY:dict = {
     'ü': 'ü'
 }
 
-HARMONY_FOR_PRESENT_FIRST:dict = {
+HARMONY_FOR_PRESENT_FIRST: dict = {
     'a': 'a',
     'e': 'e',
     'ö': 'e',
@@ -32,7 +32,7 @@ HARMONY_FOR_PRESENT_FIRST:dict = {
     'ü': 'e'
 }
 
-HARMONY_FOR_PRESENT:dict = {
+HARMONY_FOR_PRESENT: dict = {
     'e': 'i',
     'i': 'e',
     'ö': 'ü',
@@ -246,8 +246,7 @@ MAJOR_HAMONY_EXCEPTIONS:tuple = (
     'ziraat'
 )
 
-
-EXCEPTION_MISSING:dict = {
+EXCEPTION_MISSING: dict = {
     'ağız': 'ağz',
     'isim': 'ism',
     'kasır': 'kasr',
@@ -277,19 +276,19 @@ N_CONNECTOR:tuple = (
 )
 
 # de + iyorum = diyorum
-VERBS_LOSING_VOWELS:dict = {
+VERBS_LOSING_VOWELS: dict = {
     'ye': 'yi',
     'de': 'di'
 }
 
 # git -> gider, sat -> satar
-VERBS_HARDEN:dict = {
+VERBS_HARDEN: dict = {
     'git': 'gid',
     'et': 'ed'
 }
 
 # K -> G change in some nouns ending with -nk (not all of them, for instance: link, bank)
-NK_G_CHANGE:dict = {
+NK_G_CHANGE: dict = {
     'renk': 'reng',
     'frank': 'frang',
     'frenk': 'freng',
@@ -353,7 +352,6 @@ NON_T_D_CHANGE_VERBS:tuple = (
     'üret',
     'yönet',
 )
-
 
 """
     tek -> teki

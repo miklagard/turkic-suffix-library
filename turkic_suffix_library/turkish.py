@@ -60,7 +60,7 @@ class Turkish(TurkishClass):
         # firstly exceptions for ben (I) and you (sen)
 
         lower_word = self.lower(self.word)
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
         self.apostrophes(**kwargs)
 
@@ -93,7 +93,7 @@ class Turkish(TurkishClass):
         """
         self.apostrophes(**kwargs)
 
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
         if self.n_connector():
             self.concat('n')
@@ -108,7 +108,7 @@ class Turkish(TurkishClass):
         """
             -de hali
         """
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
         self.apostrophes(**kwargs)
 
@@ -156,7 +156,7 @@ class Turkish(TurkishClass):
             Ismin esitlik hali: -ce, -ca etc.
         """
 
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
         if self.n_connector():
             self.concat('n')
@@ -187,8 +187,8 @@ class Turkish(TurkishClass):
             Iyelik tamlanan eki
             Ayakkabısı
         """
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         if not (person == 3 and plural):
             if not self.proper_noun:
@@ -309,10 +309,10 @@ class Turkish(TurkishClass):
             kedi degildir
         """
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
 
         if negative:
             self.concat(' değil')
@@ -365,10 +365,10 @@ class Turkish(TurkishClass):
             kediydi
             kedi degildi
         """
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
 
         if negative:
             self.concat(' değil')
@@ -395,17 +395,16 @@ class Turkish(TurkishClass):
 
         return self.common_return('copula_definite_past', **kwargs)
 
-    
     def copula_indefinite_past(self, **kwargs):
         """
             kediymis
             kedi degilmis
         """
 
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         if negative:
             if question:
@@ -439,7 +438,7 @@ class Turkish(TurkishClass):
 
         ae = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{ae}')
@@ -458,11 +457,11 @@ class Turkish(TurkishClass):
             Note: For alternative usage of present continuous tense, check the function
                     present_continuous_simple_alternative
         """
-        from_able:bool = self.is_from_able()
-        negative:bool = kwargs.get('negative', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
+        from_able: bool = self.is_from_able()
+        negative: bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
 
         if not negative:
             self.harden_verb()
@@ -520,9 +519,9 @@ class Turkish(TurkishClass):
                 * aramaktayım
                 * yapmaktayım
         """
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
@@ -531,9 +530,9 @@ class Turkish(TurkishClass):
 
         self.concat(f't{letter_a}')
 
-        question:bool = kwargs.get('question', False)
-        plural:bool = kwargs.get('plural', False)
-        person:int = kwargs.get('person', 3)
+        question: bool = kwargs.get('question', False)
+        plural: bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
 
         if question and not (person == 3 and plural):
             self.concat(f' m{self.minor()}')
@@ -556,13 +555,13 @@ class Turkish(TurkishClass):
         """
             Geniş zaman (aorist)
         """
-        from_able:bool = self.is_from_able()
-        question:bool = kwargs.get('question', False)
-        negative:bool = kwargs.get('negative', False)
-        plural:bool = kwargs.get('plural', False)
-        person:int = kwargs.get('person', 3)
+        from_able: bool = self.is_from_able()
+        question: bool = kwargs.get('question', False)
+        negative: bool = kwargs.get('negative', False)
+        plural: bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
 
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
         if not negative:
             self.soften()
@@ -649,22 +648,22 @@ class Turkish(TurkishClass):
             -di'li geçmiş zaman
         """
 
-        letter_a:str = self.letter_a()
+        letter_a : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
 
-        minor:str = self.minor()
+        minor : str = self.minor()
 
         if self.last_letter_is_vowel() or not self.last_letter_is_hard():
-            letter_d:str = 'd'
+            letter_d : str = 'd'
         else:
-            letter_d:str = 't'
+            letter_d : str = 't'
 
-        plural:bool = kwargs.get('plural', False)
-        person:int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
 
         self.if_condition(
             person, plural,
@@ -684,10 +683,10 @@ class Turkish(TurkishClass):
         return self.common_return('past_definite', **kwargs)
 
     def past_progressive_dubitative(self, **kwargs):
-        person:int = kwargs.get('person', 3)
-        negative:bool = kwargs.get('negative', False)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        negative: bool = kwargs.get('negative', False)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
 
         self.replace_word(self.present_continuous_simple(
             person=3,
@@ -711,8 +710,8 @@ class Turkish(TurkishClass):
         return self.common_return('past_progressive_dubitative', **kwargs)
 
     def past_progressive_alternative_dubitative(self, **kwargs):
-        person:int = kwargs.get('person', 3)
-        plural:bool = person == 3 and kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = person == 3 and kwargs.get('plural', False)
 
         self.replace_word(self.present_continuous_simple_alternative(
             person=3,
@@ -726,7 +725,7 @@ class Turkish(TurkishClass):
         if person == 3 and kwargs.get('plural', False):
             plural = False
         else:
-            plural:bool = kwargs.get('plural', False)
+            plural: bool = kwargs.get('plural', False)
 
         self.replace_word(self.indefinite_past(
             person=person,
@@ -743,19 +742,19 @@ class Turkish(TurkishClass):
             mişli geçmiş zaman veya öğrenilen geçmiş zaman
         """
 
-        letter_a:str = self.letter_a()
-        from_able:bool = self.is_from_able()
+        letter_a : str = self.letter_a()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
 
-        minor:str = self.minor()
+        minor : str = self.minor()
 
         self.concat(f'm{minor}ş')
 
-        question:bool = kwargs.get('question', False)
-        plural:bool = kwargs.get('plural', False)
-        person:int = kwargs.get('person', 3)
+        question: bool = kwargs.get('question', False)
+        plural: bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
 
         if not question:
             self.if_condition(
@@ -780,10 +779,10 @@ class Turkish(TurkishClass):
         return self.common_return('indefinite_past', **kwargs)
     
     def past_progressive_narrative(self, **kwargs):
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False) and person == 3
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False) and person == 3
 
         self.replace_word(self.present_continuous_simple(
             person=3,
@@ -797,7 +796,7 @@ class Turkish(TurkishClass):
         if person == 3 and kwargs.get('plural', False):
             plural = False
         else:
-            plural:bool = kwargs.get('plural', False)
+            plural: bool = kwargs.get('plural', False)
 
         self.replace_word(self.past_definite(
             person=person,
@@ -807,12 +806,12 @@ class Turkish(TurkishClass):
         return self.common_return('past_progressive_narrative', **kwargs)
     
     def past_progressive_alternative_narrative(self, **kwargs):
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
-        plural:bool = person == 3 and plural
+        plural: bool = person == 3 and plural
 
         self.replace_word(self.present_continuous_simple_alternative(
             person=3,
@@ -821,7 +820,7 @@ class Turkish(TurkishClass):
             plural=plural
         ).to_string())
 
-        plural:bool = kwargs.get('plural', False)
+        plural: bool = kwargs.get('plural', False)
 
         if person == 3 and plural:
             plural = False
@@ -836,10 +835,10 @@ class Turkish(TurkishClass):
         return self.common_return('past_progressive_alternative_narrative', **kwargs)
 
     def past_perfect_narrative(self, **kwargs):
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         plural = person == 3 and plural
         self.replace_word(self.indefinite_past(
@@ -915,9 +914,9 @@ class Turkish(TurkishClass):
         return self.common_return('past_in_the_future', **kwargs)
 
     def simple_conditional_narrative(self, **kwargs):
-        person:int = kwargs.get('person', 3)
-        negative:bool = kwargs.get('negative', False)
-        plural:bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
+        negative: bool = kwargs.get('negative', False)
+        plural: bool = kwargs.get('plural', False)
 
         if negative:
             self.concat(f'm{self.letter_a()}')
@@ -941,11 +940,11 @@ class Turkish(TurkishClass):
         return self.common_return('simple_conditional_narrative', **kwargs)
 
     def past_conditional_dubitative(self, **kwargs):
-        letter_a:str = self.letter_a()
-        letter_i:str = self.letter_i()
-        negative:bool = kwargs.get('negative', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        letter_a : str = self.letter_a()
+        letter_i : str = self.letter_i()
+        negative: bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         if negative:
             self.concat(f'm{letter_a}')
@@ -976,9 +975,9 @@ class Turkish(TurkishClass):
         """
             Gelecek zaman
         """
-        ae:str = self.letter_a()
+        ae : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{ae}')
@@ -992,10 +991,10 @@ class Turkish(TurkishClass):
         if not kwargs.get('negative', False):
             self.harden_verb()
         
-        letter_a:str = self.letter_a()
-        letter_i:str = self.letter_i()
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        letter_a : str = self.letter_a()
+        letter_i : str = self.letter_i()
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         if kwargs.get('question', False):
             if kwargs.get('person', 3) == 3 and kwargs.get('plural', False):
@@ -1029,17 +1028,17 @@ class Turkish(TurkishClass):
         """
             süzecektim
         """
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        negative:bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
 
         self.future_simple(negative=negative)
 
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
 
-        letter_i:str = self.letter_i()
-        letter_d:str = 'd'
+        letter_i : str = self.letter_i()
+        letter_d : str = 'd'
         
         if self.last_letter_is_hard():
             letter_d = 't'
@@ -1071,13 +1070,13 @@ class Turkish(TurkishClass):
         """
         self.replace_word(self.future_simple(negative=kwargs.get('negative', False)).to_string())
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
 
-        letter_i:str = self.letter_i()
+        letter_i : str = self.letter_i()
 
         self.concat(f'm{letter_i}ş')
 
@@ -1103,14 +1102,14 @@ class Turkish(TurkishClass):
         return self.common_return('future_dubitative', **kwargs)
 
     def future_conditional(self, **kwargs):
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        negative:bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
         
         self.future_simple(person=3, negative=negative)
 
-        letter_a:str = self.letter_a()
-        letter_i:str = self.letter_i()
+        letter_a : str = self.letter_a()
+        letter_i : str = self.letter_i()
 
         if person == 3 and plural:
             self.concat(f'l{letter_a}r')
@@ -1164,8 +1163,8 @@ class Turkish(TurkishClass):
         return self.common_return('unify_verbs', **kwargs)
 
     def necessitative_mood(self, **kwargs):
-        letter_a:str = self.letter_a()
-        letter_i:str = self.letter_i()
+        letter_a : str = self.letter_a()
+        letter_i : str = self.letter_i()
 
         if kwargs.get('negative', False) and not self.is_from_able():
             self.concat(f'm{letter_a}')
@@ -1180,7 +1179,7 @@ class Turkish(TurkishClass):
             süzmeliydim
         """
 
-        letter_i:str = self.letter_i()
+        letter_i : str = self.letter_i()
 
         self.necessitative_mood()
 
@@ -1190,8 +1189,8 @@ class Turkish(TurkishClass):
         if kwargs.get('question', False):
             self.concat(f' m{letter_i}')
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         self.if_condition(
             person, plural,
@@ -1209,8 +1208,8 @@ class Turkish(TurkishClass):
             süzmeliydim
         """
 
-        letter_i:str = self.letter_i()
-        negative:bool = kwargs.get('negative', False)
+        letter_i : str = self.letter_i()
+        negative: bool = kwargs.get('negative', False)
 
         self.necessitative_mood(negative=negative)
 
@@ -1223,8 +1222,8 @@ class Turkish(TurkishClass):
         self.if_ends_with_vowel('y')
 
         self.concat(f'd{letter_i}')
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         self.if_condition(
             person, plural,
@@ -1241,10 +1240,10 @@ class Turkish(TurkishClass):
             süzmeliymişim
         """
 
-        letter_i:str = self.letter_i()
-        negative:bool = kwargs.get('negative', False)
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        letter_i : str = self.letter_i()
+        negative: bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
         self.necessitative_mood(negative=negative)
 
@@ -1277,18 +1276,18 @@ class Turkish(TurkishClass):
             For the second person, there is no suffix
         """
 
-        ae:str = self.letter_a()
+        ae : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{ae}')
 
-        minor:str = self.minor()
+        minor : str = self.minor()
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
 
         if person == 2 and question:
             self.word = '-'
@@ -1329,11 +1328,11 @@ class Turkish(TurkishClass):
         """
             Dilek - Şart kipi (-se, -sa)
         """
-        letter_a:str = self.letter_a()
-        letter_i:str = self.letter_i()
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        from_able:bool = self.is_from_able()
+        letter_a : str = self.letter_a()
+        letter_i : str = self.letter_i()
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
@@ -1358,12 +1357,12 @@ class Turkish(TurkishClass):
         """
             İstek kipi (geleyim, gelesin, gele, gelelim, gelesiniz, geleler)
         """
-        letter_a:str = self.letter_a()
-        letter_i:str = self.letter_i()
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
+        letter_a : str = self.letter_a()
+        letter_i : str = self.letter_i()
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False):
             if not from_able:
@@ -1402,10 +1401,10 @@ class Turkish(TurkishClass):
             yaptı mıydım, yaptı mıydın, yaptı mıydı, yaptı mıydık, yaptı mıydınız, yaptılar mıydı
         """
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
 
         if self.is_from_passive():
             negative = False
@@ -1436,10 +1435,10 @@ class Turkish(TurkishClass):
         return self.common_return('past_definite_narrative', **kwargs)
 
     def indefinite_past_reportative(self, **kwargs):
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
-        negative:bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
+        negative: bool = kwargs.get('negative', False)
 
         if negative:
             self.concat(f'm{self.letter_a()}y{self.letter_a()}')
@@ -1484,10 +1483,10 @@ class Turkish(TurkishClass):
         return self.common_return('indefinite_past_reportative', **kwargs)
 
     def definite_past_reportative(self, **kwargs):
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
-        negative:bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
+        negative: bool = kwargs.get('negative', False)
 
         if negative:
             self.concat(f'm{self.letter_a()}y{self.letter_a()}')
@@ -1532,11 +1531,11 @@ class Turkish(TurkishClass):
             Example: It is heard by someone that somebody did something in the past
         """
 
-        person:int = kwargs.get('person', 3)
-        question:bool = kwargs.get('question', False)
-        negative:bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        question: bool = kwargs.get('question', False)
+        negative: bool = kwargs.get('negative', False)
 
-        plural:bool = kwargs.get('plural', False)
+        plural: bool = kwargs.get('plural', False)
 
         if person == 3 and plural and question:
             self.replace_word(self.indefinite_past(
@@ -1571,10 +1570,10 @@ class Turkish(TurkishClass):
             Example: It is heard by someone that somebody will do something in the past
         """
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
-        negative:bool = kwargs.get('negative', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
+        negative: bool = kwargs.get('negative', False)
 
         if self.is_from_passive():
             negative = False
@@ -1593,7 +1592,7 @@ class Turkish(TurkishClass):
         self.if_ends_with_vowel(f'y')
         self.concat(f'm{self.letter_i()}ş')
 
-        i:str = self.letter_i()
+        i : str = self.letter_i()
 
         self.if_condition(
             person, plural,
@@ -1612,9 +1611,9 @@ class Turkish(TurkishClass):
                 Example: Somebody will do something in the past
         """
 
-        person:int = kwargs.get('person', 3)
-        plural:bool = kwargs.get('plural', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        plural: bool = kwargs.get('plural', False)
+        question: bool = kwargs.get('question', False)
 
         if person == 3 and plural and question:
             self.replace_word(self.future_simple(
@@ -1658,9 +1657,9 @@ class Turkish(TurkishClass):
         """
         self.harden_verb()
 
-        lower_word:str = self.lower(self.word)
+        lower_word : str = self.lower(self.word)
 
-        minor:str = self.minor()
+        minor : str = self.minor()
 
         if lower_word.endswith('l'):
             self.concat(self.minor())
@@ -1701,9 +1700,9 @@ class Turkish(TurkishClass):
 
             Use this method without conjuncting
         """
-        ae:str = self.letter_a()
+        ae : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False):
             if not from_able:
@@ -1727,7 +1726,7 @@ class Turkish(TurkishClass):
 
             Use this method without conjuncting
         """
-        ae:str = self.letter_a()
+        ae : str = self.letter_a()
 
         self.replace_word(self.past_definite(
             negative=kwargs.get('negative', False),
@@ -1748,10 +1747,10 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae:str = self.letter_a()
-        letter_i:str = self.letter_i()
-        minor:str = self.minor()
-        from_able:bool = self.is_from_able()
+        ae : str = self.letter_a()
+        letter_i : str = self.letter_i()
+        minor : str = self.minor()
+        from_able: bool = self.is_from_able()
 
         self.harden_verb()
 
@@ -1778,10 +1777,10 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae:str = self.letter_a()
-        minor:str = self.minor()
+        ae : str = self.letter_a()
+        minor : str = self.minor()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False):
             if not from_able:
@@ -1806,9 +1805,9 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae:str = self.letter_a()
+        ae : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if not from_able:
             self.concat(f'm{ae}')
@@ -1826,7 +1825,7 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        letter_i:str = self.letter_i()
+        letter_i : str = self.letter_i()
         self.word = self.infinitive().to_string()
         self.concat(f's{letter_i}z{letter_i}n')
 
@@ -1841,9 +1840,9 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae:str = self.letter_a()
+        ae : str = self.letter_a()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False):
             if not from_able:
@@ -1866,10 +1865,10 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae:str = self.letter_a()
-        letter_i:str = self.letter_i()
+        ae : str = self.letter_a()
+        letter_i : str = self.letter_i()
 
-        from_able:bool = self.is_from_able()
+        from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False):
             if not from_able:
@@ -1888,11 +1887,11 @@ class Turkish(TurkishClass):
             yapardim
         """
 
-        person:int = kwargs.get('person', 3)
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
 
-        plural:bool = person == 3 and kwargs.get('plural', False)
+        plural: bool = person == 3 and kwargs.get('plural', False)
 
         self.simple_tense(
             person=3,
@@ -1904,7 +1903,7 @@ class Turkish(TurkishClass):
         if plural:
             plural = False
         else:
-            plural:bool = kwargs.get('plural', False)
+            plural: bool = kwargs.get('plural', False)
 
         self.if_ends_with_vowel('y')
 
@@ -1920,11 +1919,11 @@ class Turkish(TurkishClass):
             yaparmisim
         """
 
-        person:int = kwargs.get('person', 3)
-        negative:bool = kwargs.get('negative', False)
-        question:bool = kwargs.get('question', False)
+        person: int = kwargs.get('person', 3)
+        negative: bool = kwargs.get('negative', False)
+        question: bool = kwargs.get('question', False)
 
-        plural:bool = person == 3 and kwargs.get('plural', False)
+        plural: bool = person == 3 and kwargs.get('plural', False)
 
         self.simple_tense(
             person=3,
@@ -1936,7 +1935,7 @@ class Turkish(TurkishClass):
         if plural:
             plural = False
         else:
-            plural:bool = kwargs.get('plural', False)
+            plural: bool = kwargs.get('plural', False)
 
         self.if_ends_with_vowel('y')
 

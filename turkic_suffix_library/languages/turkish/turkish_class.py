@@ -12,7 +12,7 @@ class TurkishClass(TurkicClass):
                 'action': 'possessive'
             })
 
-        self.language:str = 'turkish'
+        self.language: str = 'turkish'
 
     def make_plural(self) -> str:
         if self.word.lower() == 'ben':
@@ -73,13 +73,13 @@ class TurkishClass(TurkicClass):
     def last_letter_is_hard(self) -> bool:
         return self.last_letter().get('letter') in con.HARD_CONSONANTS
 
-    def if_ends_with_hard(self, concat_1:str, concat_2:str) -> None:
+    def if_ends_with_hard(self, concat_1: str, concat_2: str) -> None:
         if self.last_letter_is_hard():
             self.concat(concat_1)
         else:
             self.concat(concat_2)
 
-    def if_ends_with_vowel(self, concat_text:str) -> None:
+    def if_ends_with_vowel(self, concat_text: str) -> None:
         if self.last_letter_is_vowel():
             self.concat(concat_text)
 
@@ -111,7 +111,7 @@ class TurkishClass(TurkicClass):
         return False
 
     def ng_change(self) -> str:
-        word:str = self.last_word()
+        word: str = self.last_word()
 
         for noun in con.NK_G_CHANGE:
             if word.endswith(noun):
@@ -132,12 +132,12 @@ class TurkishClass(TurkicClass):
             self.change_last_letter(new_letter)
 
     def verb_in_minor_harmony_exception(self) -> bool:
-        word:str = self.last_word()
+        word: str = self.last_word()
 
         return word in con.VERB_MINOR_HARMONY_EXCEPTIONS
 
     def harden_verb(self) -> str:
-        lower:str = self.lower(self.word)
+        lower: str = self.lower(self.word)
 
         for hard in con.VERBS_HARDEN:
             if lower.endswith(hard) and not self.is_non_t_d_change_verb():

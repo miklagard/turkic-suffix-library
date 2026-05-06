@@ -33,9 +33,9 @@ def from_upper_or_lower(new_word, reference_word):
 def last_vowel(word: str) -> dict:
     word: str = last_word(word)
 
-    vowel_count:int = 0
+    vowel_count: int = 0
 
-    return_data:dict = {}
+    return_data: dict = {}
 
     for letter in word:
         if letter in consonants.FRONT_VOWELS:
@@ -66,18 +66,18 @@ def last_word(word: str) -> str:
     return word.split(' ')[-1].lower()
 
 
-def other_words_but_not_last(word:str) -> str:
+def other_words_but_not_last(word: str) -> str:
     return ' '.join(word.split(' ')[:-1])
 
 
-def change_last_letter(word:str, new_last_letter:str) -> str:
+def change_last_letter(word: str, new_last_letter: str) -> str:
     return concat(word[0:len(word) - 1], new_last_letter)
 
 
-def last_letter(word:str) -> dict:
-    word:str = make_lower(word.replace('\'', ''))
-    return_data:dict = {}
-    actual_last_letter:str = word[len(word) - 1]
+def last_letter(word: str) -> dict:
+    word: str = make_lower(word.replace('\'', ''))
+    return_data: dict = {}
+    actual_last_letter: str = word[len(word) - 1]
 
     if actual_last_letter == '\'':
         actual_last_letter = word[len(word) - 2]
@@ -119,11 +119,11 @@ def last_letter(word:str) -> dict:
 
 
 def soften(parameter_word: str) -> str:
-    word:str = parameter_word
-    lower:str = make_lower(parameter_word)
+    word: str = parameter_word
+    lower: str = make_lower(parameter_word)
 
-    actual_last_letter:str = last_letter(word)
-    actual_last_vowel:str = last_vowel(word)
+    actual_last_letter: str = last_letter(word)
+    actual_last_vowel: str = last_vowel(word)
 
     if 'discontinuous_hard_consonant' in actual_last_letter:
         if actual_last_vowel['vowel_count'] > 1 or word in consonants.SOFTEN_SINGLE_SYLLABLE_NOUNS:
@@ -139,7 +139,7 @@ def soften(parameter_word: str) -> str:
 
 def exception_missing(parameter_word: str, proper_noun:bool=False) ->str:
     if not proper_noun:
-        last:str = last_word(parameter_word)
+        last: str = last_word(parameter_word)
 
         if last in consonants.EXCEPTION_MISSING:
             word = consonants.EXCEPTION_MISSING[last]

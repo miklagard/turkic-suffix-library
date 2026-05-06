@@ -1,9 +1,9 @@
 class TurkicClass:
     def __init__(self, parameter_word: str, **kwargs):
-        self.word:str = parameter_word
-        self.stem:str = kwargs.get('stem', parameter_word)
+        self.word: str = parameter_word
+        self.stem: str = kwargs.get('stem', parameter_word)
         self.history:list = kwargs.get('history', [])
-        self.language:str = kwargs.get('language')
+        self.language: str = kwargs.get('language')
         self.proper_noun:bool = kwargs.get('proper_noun', False)
         self.apostrophes_applied:bool = False
 
@@ -20,7 +20,7 @@ class TurkicClass:
             'history': self.history
         }
 
-    def lower(self, parameter_word:str) -> str:
+    def lower(self, parameter_word: str) -> str:
         word = parameter_word
 
         if self.language == 'turkish':
@@ -28,7 +28,7 @@ class TurkicClass:
 
         return word.lower()
 
-    def upper(self, parameter_word:str) -> str:
+    def upper(self, parameter_word: str) -> str:
         if parameter_word is None:
             return ''
 
@@ -45,13 +45,13 @@ class TurkicClass:
     def other_words_but_not_last(self) -> str:
         return ' '.join(self.lower(self.word).split(' ')[:-1])
 
-    def concat(self, add_string:str) -> None:
+    def concat(self, add_string: str) -> None:
         if self.word.isupper():
             self.word += self.upper(add_string)
         else:
             self.word += add_string
 
-    def from_upper_or_lower(self, new_word:str) -> str:
+    def from_upper_or_lower(self, new_word: str) -> str:
         if self.word[len(self.word) - 1].isupper():
             return_data = self.lower(new_word)
         else:
