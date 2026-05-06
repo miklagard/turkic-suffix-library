@@ -2,7 +2,7 @@ from turkic_suffix_library.languages.turkish.turkish_class import TurkishClass
 
 
 class Turkish(TurkishClass):
-    def common_return(self, action, **kwargs) -> Turkish:
+    def common_return(self, action, **kwargs):
         self.history.append({
             'action': action,
             'current': self.word,
@@ -17,7 +17,7 @@ class Turkish(TurkishClass):
         )
 
 
-    def plural(self, **kwargs) -> Turkish:
+    def plural(self, **kwargs):
         if self.n_connector():
             self.concat('n')
 
@@ -31,7 +31,7 @@ class Turkish(TurkishClass):
         return self.common_return('plural', **kwargs)
 
 
-    def accusative(self, **kwargs) -> Turkish:
+    def accusative(self, **kwargs):
         """
             -i hali
         """
@@ -53,7 +53,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('accusative', **kwargs)
 
-    def dative(self, **kwargs) -> Turkish:
+    def dative(self, **kwargs):
         """
             -e hali
         """
@@ -87,7 +87,7 @@ class Turkish(TurkishClass):
         return self.common_return('dative', **kwargs)
 
 
-    def ablative(self, **kwargs) -> Turkish:
+    def ablative(self, **kwargs):
         """
             -den hali
         """
@@ -104,7 +104,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('ablative', **kwargs)
 
-    def locative(self, **kwargs) -> Turkish:
+    def locative(self, **kwargs):
         """
             -de hali
         """
@@ -122,7 +122,7 @@ class Turkish(TurkishClass):
         return self.common_return('locative', **kwargs)
 
 
-    def genitive(self, **kwargs) -> Turkish:
+    def genitive(self, **kwargs):
         """
             Iyelik aitlik eki
             Ayakkabinin
@@ -151,7 +151,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('genitive', **kwargs)
 
-    def equalative(self, **kwargs) -> Turkish:
+    def equalative(self, **kwargs):
         """
             Ismin esitlik hali: -ce, -ca etc.
         """
@@ -166,7 +166,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('equalative', **kwargs)
 
-    def instrumental(self, **kwargs) -> Turkish:
+    def instrumental(self, **kwargs):
         """
             Ismin vasıta hali: -le, -la, -yle, -yla
         """
@@ -182,7 +182,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('instrumental', **kwargs)
 
-    def possessive(self, **kwargs) -> Turkish:
+    def possessive(self, **kwargs):
         """
             Iyelik tamlanan eki
             Ayakkabısı
@@ -249,13 +249,13 @@ class Turkish(TurkishClass):
 
         return self.common_return('possessive', **kwargs)
 
-    def relative_pronoun(self, **kwargs) -> Turkish:
+    def relative_pronoun(self, **kwargs):
         self.genitive()
         self.concat('ki')
 
         return self.common_return('relative_pronoun', **kwargs)
 
-    def privative(self, **kwargs) -> Turkish:
+    def privative(self, **kwargs):
         if self.n_connector():
             self.concat('n')
 
@@ -263,7 +263,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('privative', **kwargs)
 
-    def ordinal(self, **kwargs) -> Turkish:
+    def ordinal(self, **kwargs):
         """
             Ordinal numbers: One->First, Two->Second etc.
 
@@ -284,7 +284,7 @@ class Turkish(TurkishClass):
         return self.common_return('ordinal', **kwargs)
 
 
-    def distributive(self, **kwargs) -> Turkish:
+    def distributive(self, **kwargs):
         """
             Distributive numbers: One->One each, Two->Two each.
 
@@ -303,7 +303,7 @@ class Turkish(TurkishClass):
         return self.common_return('distributive', **kwargs)
 
     
-    def copula_present(self, **kwargs) -> Turkish:
+    def copula_present(self, **kwargs):
         """
             kedidir
             kedi degildir
@@ -360,7 +360,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('copula_present', **kwargs)
 
-    def copula_definite_past(self, **kwargs) -> Turkish:
+    def copula_definite_past(self, **kwargs):
         """
             kediydi
             kedi degildi
@@ -396,7 +396,7 @@ class Turkish(TurkishClass):
         return self.common_return('copula_definite_past', **kwargs)
 
     
-    def copula_indefinite_past(self, **kwargs) -> Turkish:
+    def copula_indefinite_past(self, **kwargs):
         """
             kediymis
             kedi degilmis
@@ -432,7 +432,7 @@ class Turkish(TurkishClass):
         return self.common_return('copula_indefinite_past', **kwargs)
 
     
-    def infinitive(self, **kwargs) -> Turkish:
+    def infinitive(self, **kwargs):
         """
             Mastar eki
         """
@@ -451,7 +451,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('infinitive', **kwargs)
 
-    def present_continuous_simple(self, **kwargs) -> Turkish:
+    def present_continuous_simple(self, **kwargs):
         """
             Şimdiki zaman
             Example: arıyorum
@@ -512,7 +512,7 @@ class Turkish(TurkishClass):
         return self.common_return('present_continuous_simple', **kwargs)
 
     
-    def present_continuous_simple_alternative(self, **kwargs) -> Turkish:
+    def present_continuous_simple_alternative(self, **kwargs):
         """
             There are two ways to express 'present continuous tense in Turkish '
             This kind is not common in daily Turkish usage anymore
@@ -552,7 +552,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('present_continuous_simple_alternative', **kwargs)
 
-    def simple_tense(self, **kwargs) -> Turkish:
+    def simple_tense(self, **kwargs):
         """
             Geniş zaman (aorist)
         """
@@ -643,7 +643,7 @@ class Turkish(TurkishClass):
         return self.common_return('simple_tense', **kwargs)
 
     
-    def past_definite(self, **kwargs) -> Turkish:
+    def past_definite(self, **kwargs):
         """
             Past tense
             -di'li geçmiş zaman
@@ -683,7 +683,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_definite', **kwargs)
 
-    def past_progressive_dubitative(self, **kwargs) -> Turkish:
+    def past_progressive_dubitative(self, **kwargs):
         person:int = kwargs.get('person', 3)
         negative:bool = kwargs.get('negative', False)
         plural:bool = kwargs.get('plural', False)
@@ -710,7 +710,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_progressive_dubitative', **kwargs)
 
-    def past_progressive_alternative_dubitative(self, **kwargs) -> Turkish:
+    def past_progressive_alternative_dubitative(self, **kwargs):
         person:int = kwargs.get('person', 3)
         plural:bool = person == 3 and kwargs.get('plural', False)
 
@@ -735,7 +735,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_progressive_alternative_dubitative', **kwargs)
 
-    def indefinite_past(self, **kwargs) -> Turkish:
+    def indefinite_past(self, **kwargs):
         """
             Past Aorist
             Not the same with English past perfect tense
@@ -779,7 +779,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('indefinite_past', **kwargs)
     
-    def past_progressive_narrative(self, **kwargs) -> Turkish:
+    def past_progressive_narrative(self, **kwargs):
         negative:bool = kwargs.get('negative', False)
         question:bool = kwargs.get('question', False)
         person:int = kwargs.get('person', 3)
@@ -806,7 +806,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_progressive_narrative', **kwargs)
     
-    def past_progressive_alternative_narrative(self, **kwargs) -> Turkish:
+    def past_progressive_alternative_narrative(self, **kwargs):
         negative:bool = kwargs.get('negative', False)
         question:bool = kwargs.get('question', False)
         person:int = kwargs.get('person', 3)
@@ -835,7 +835,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_progressive_alternative_narrative', **kwargs)
 
-    def past_perfect_narrative(self, **kwargs) -> Turkish:
+    def past_perfect_narrative(self, **kwargs):
         negative:bool = kwargs.get('negative', False)
         question:bool = kwargs.get('question', False)
         person:int = kwargs.get('person', 3)
@@ -866,7 +866,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_perfect_narrative', **kwargs)
 
-    def doubtful_distant_past(self, **kwargs) -> Turkish:
+    def doubtful_distant_past(self, **kwargs):
         """
             Öğrenilen geçmiş zamanın rivayeti
             Duymuşmuşum Duymuşmuşsun Duymuşmuş Duymuşmuşuz Duymuşmuşunuz Duymuşmuşlar
@@ -898,7 +898,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('doubtful_distant_past', **kwargs)
 
-    def past_in_the_future(self, **kwargs) -> Turkish:
+    def past_in_the_future(self, **kwargs):
         self.replace_word(self.indefinite_past(
             person=3,
             question=kwargs.get('question', False),
@@ -914,7 +914,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_in_the_future', **kwargs)
 
-    def simple_conditional_narrative(self, **kwargs) -> Turkish:
+    def simple_conditional_narrative(self, **kwargs):
         person:int = kwargs.get('person', 3)
         negative:bool = kwargs.get('negative', False)
         plural:bool = kwargs.get('plural', False)
@@ -972,7 +972,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_conditional_dubitative', **kwargs)
 
-    def future_simple(self, **kwargs) -> Turkish:
+    def future_simple(self, **kwargs):
         """
             Gelecek zaman
         """
@@ -1025,7 +1025,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('future_simple', **kwargs)
 
-    def future_in_the_past(self, **kwargs) -> Turkish:
+    def future_in_the_past(self, **kwargs):
         """
             süzecektim
         """
@@ -1065,7 +1065,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('future_in_the_past', **kwargs)
 
-    def future_dubitative(self, **kwargs) -> Turkish:
+    def future_dubitative(self, **kwargs):
         """
             süzecekmişim
         """
@@ -1102,7 +1102,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('future_dubitative', **kwargs)
 
-    def future_conditional(self, **kwargs) -> Turkish:
+    def future_conditional(self, **kwargs):
         person:int = kwargs.get('person', 3)
         plural:bool = kwargs.get('plural', False)
         negative:bool = kwargs.get('negative', False)
@@ -1130,7 +1130,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('future_conditional', **kwargs)
 
-    def unify_verbs(self, **kwargs) -> Turkish:
+    def unify_verbs(self, **kwargs):
         """
             Unified verbs (Birleşik fiiler) (Not a suffix but for 'can-bil' modal verb, this is necessary)
             Ability - Yeterlilik: kızabil (bil) (English modal auxiliary verb: Can)
@@ -1163,7 +1163,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('unify_verbs', **kwargs)
 
-    def necessitative_mood(self, **kwargs) -> Turkish:
+    def necessitative_mood(self, **kwargs):
         letter_a:str = self.letter_a()
         letter_i:str = self.letter_i()
 
@@ -1203,7 +1203,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('necessitative_mood_simple_tense', **kwargs)
 
-    def necessitative_past_narrative(self, **kwargs) -> Turkish:
+    def necessitative_past_narrative(self, **kwargs):
         """
             Gereklilik kipi gecmis zaman
             süzmeliydim
@@ -1236,7 +1236,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('necessitative_past_narrative', **kwargs)
 
-    def necessitative_past_dubitative(self, **kwargs) -> Turkish:
+    def necessitative_past_dubitative(self, **kwargs):
         """
             süzmeliymişim
         """
@@ -1268,7 +1268,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('necessitative_past_dubitative', **kwargs)
 
-    def imperative_mood(self, **kwargs) -> Turkish:
+    def imperative_mood(self, **kwargs):
         """
             Make the verb command
             Usage: do it, break it, come!
@@ -1325,7 +1325,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('imperative_mood', **kwargs)
 
-    def conditional_mood_simple_tense(self, **kwargs) -> Turkish:
+    def conditional_mood_simple_tense(self, **kwargs):
         """
             Dilek - Şart kipi (-se, -sa)
         """
@@ -1395,7 +1395,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('subjunctive_mood_simple_tense', **kwargs)
 
-    def past_definite_narrative(self, **kwargs) -> Turkish:
+    def past_definite_narrative(self, **kwargs):
         """
             Bilinen geçmiş zamanın hikayesi
             yaptıydım, yaptıydın, yaptıydı, yaptıydık, yaptıydınız, yaptıydılar
@@ -1435,7 +1435,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_definite_narrative', **kwargs)
 
-    def indefinite_past_reportative(self, **kwargs) -> Turkish:
+    def indefinite_past_reportative(self, **kwargs):
         person:int = kwargs.get('person', 3)
         plural:bool = kwargs.get('plural', False)
         question:bool = kwargs.get('question', False)
@@ -1483,7 +1483,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('indefinite_past_reportative', **kwargs)
 
-    def definite_past_reportative(self, **kwargs) -> Turkish:
+    def definite_past_reportative(self, **kwargs):
         person:int = kwargs.get('person', 3)
         plural:bool = kwargs.get('plural', False)
         question:bool = kwargs.get('question', False)
@@ -1525,7 +1525,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('definite_past_reportative', **kwargs)
 
-    def past_indefinite_past(self, **kwargs) -> Turkish:
+    def past_indefinite_past(self, **kwargs):
         """
             Öğrenilen geçmiş zamanın hikayesi
             Yapmışlardı (-miş -di)
@@ -1564,7 +1564,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_indefinite_past', **kwargs)
 
-    def indefinite_past_future(self, **kwargs) -> Turkish:
+    def indefinite_past_future(self, **kwargs):
         """
             Gelecek zamanın rivayeti
             Yapacaklardı (-acak -mış)
@@ -1605,7 +1605,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('indefinite_past_future', **kwargs)
 
-    def past_future(self, **kwargs) -> Turkish:
+    def past_future(self, **kwargs):
         """
             Gelecek zamanın hikayesi
                 Yapacaklardı (-acak -tı)
@@ -1643,7 +1643,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('past_future', **kwargs)
 
-    def passive(self, **kwargs) -> Turkish:
+    def passive(self, **kwargs):
         """
             Turns verb into passive (edilgen):
 
@@ -1673,7 +1673,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('passive', **kwargs)
     
-    def adverb_during_action(self, **kwargs) -> Turkish:
+    def adverb_during_action(self, **kwargs):
         """
             Giderken etc. (iken)
 
@@ -1695,7 +1695,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_during_action', **kwargs)
     
-    def adverb_continuity(self, **kwargs) -> Turkish:
+    def adverb_continuity(self, **kwargs):
         """
             Git -> Gide gide etc. (-e)
 
@@ -1721,7 +1721,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_continuity', **kwargs)
 
-    def adverb_repeatedly(self, **kwargs) -> Turkish:
+    def adverb_repeatedly(self, **kwargs):
         """
             Git -> Gide gide etc. (-e)
 
@@ -1739,7 +1739,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_repeatedly', **kwargs)
 
-    def adverb_after_action(self, **kwargs) -> Turkish:
+    def adverb_after_action(self, **kwargs):
         """
             Gidince etc. (-nca)
 
@@ -1769,7 +1769,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_after_action', **kwargs)
 
-    def adverb_after_action_alternative(self, **kwargs) -> Turkish:
+    def adverb_after_action_alternative(self, **kwargs):
         """
             Gidip etc. (-p)
 
@@ -1817,7 +1817,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_without_action', **kwargs)
 
-    def adverb_without_action_alternative(self, **kwargs) -> Turkish:
+    def adverb_without_action_alternative(self, **kwargs):
         """
             Gitmeksizin etc. (-meksizin)
 
@@ -1832,7 +1832,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_without_action_alternative', **kwargs)
 
-    def adverb_by_action(self, **kwargs) -> Turkish:
+    def adverb_by_action(self, **kwargs):
         """
             Giderek etc. (-erek)
 
@@ -1857,7 +1857,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_by_action', **kwargs)
     
-    def adverb_since_action(self, **kwargs) -> Turkish:
+    def adverb_since_action(self, **kwargs):
         """
             Gideli etc. (-eli)
 
@@ -1883,7 +1883,7 @@ class Turkish(TurkishClass):
 
         return self.common_return('adverb_since_action', **kwargs)
 
-    def simple_tense_past_definite(self, **kwargs) -> Turkish:
+    def simple_tense_past_definite(self, **kwargs):
         """
             yapardim
         """
