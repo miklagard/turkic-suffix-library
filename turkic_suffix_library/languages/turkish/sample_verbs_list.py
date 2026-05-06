@@ -1,4 +1,4 @@
-VERBS:tuple = (
+VERBS: tuple = (
     'aç',
     'ağla',
     'ak',

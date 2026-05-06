@@ -122,8 +122,8 @@ def soften(parameter_word: str) -> str:
     word: str = parameter_word
     lower: str = make_lower(parameter_word)
 
-    actual_last_letter: str = last_letter(word)
-    actual_last_vowel: str = last_vowel(word)
+    actual_last_letter: dict = last_letter(word)
+    actual_last_vowel: dict = last_vowel(word)
 
     if 'discontinuous_hard_consonant' in actual_last_letter:
         if actual_last_vowel['vowel_count'] > 1 or word in consonants.SOFTEN_SINGLE_SYLLABLE_NOUNS:
@@ -137,7 +137,7 @@ def soften(parameter_word: str) -> str:
     return word
 
 
-def exception_missing(parameter_word: str, proper_noun:bool=False) ->str:
+def exception_missing(parameter_word: str, proper_noun: bool=False) ->str:
     if not proper_noun:
         last: str = last_word(parameter_word)
 

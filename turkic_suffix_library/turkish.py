@@ -16,7 +16,6 @@ class Turkish(TurkishClass):
             history=self.history
         )
 
-
     def plural(self, **kwargs):
         if self.n_connector():
             self.concat('n')
@@ -29,7 +28,6 @@ class Turkish(TurkishClass):
             self.concat(f'l{self.letter_a()}r')
 
         return self.common_return('plural', **kwargs)
-
 
     def accusative(self, **kwargs):
         """
@@ -86,7 +84,6 @@ class Turkish(TurkishClass):
 
         return self.common_return('dative', **kwargs)
 
-
     def ablative(self, **kwargs):
         """
             -den hali
@@ -120,7 +117,6 @@ class Turkish(TurkishClass):
         self.concat(letter_a)
 
         return self.common_return('locative', **kwargs)
-
 
     def genitive(self, **kwargs):
         """
@@ -509,7 +505,6 @@ class Turkish(TurkishClass):
             )
 
         return self.common_return('present_continuous_simple', **kwargs)
-
     
     def present_continuous_simple_alternative(self, **kwargs):
         """
@@ -641,7 +636,6 @@ class Turkish(TurkishClass):
 
         return self.common_return('simple_tense', **kwargs)
 
-    
     def past_definite(self, **kwargs):
         """
             Past tense

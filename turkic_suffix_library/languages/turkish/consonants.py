@@ -49,7 +49,7 @@ HARMONY_FOR_PRESENT: dict = {
 # If the loaned word is coming from Arabic and if the last letter is Arabic d,
 # and it gets a suffix starting with a vowel, -t turns into -d again.
 # Source: Sevan Nisanyan
-ARABIC_T:tuple = (
+ARABIC_T: tuple = (
     'armut',
     'ait',
     'cedit',
@@ -95,7 +95,7 @@ ARABIC_T:tuple = (
 # eg. börek + i = böreği (standard Turkish word behaviour)
 #     merak + ı = merakı (Arabic-loaned word exception)
 # Source: Sevan Nisanyan
-ARABIC_K:tuple = (
+ARABIC_K: tuple = (
     'hakkak',
     'halik',
     'idrak',
@@ -124,7 +124,7 @@ ARABIC_K:tuple = (
 
 # The exception words which has non-Turkish origins don't fit for standard Turkish Major Vowel Harmony
 # because of the vocal difference which doesn't exist in Turkish.
-MAJOR_HAMONY_EXCEPTIONS:tuple = (
+MAJOR_HAMONY_EXCEPTIONS: tuple = (
     'abajur',
     'ahval',
     'akropol',
@@ -271,7 +271,7 @@ EXCEPTION_MISSING: dict = {
     'kadir': 'kadr',
 }
 
-N_CONNECTOR:tuple = (
+N_CONNECTOR: tuple = (
     'o', 'bu', 'şu'
 )
 
@@ -321,7 +321,7 @@ NK_G_CHANGE: dict = {
 
 # sererim, silerim (e)
 # veririm, gelirim, bilirim (i)
-VERB_MINOR_HARMONY_EXCEPTIONS:tuple = (
+VERB_MINOR_HARMONY_EXCEPTIONS: tuple = (
     'al',
     'bil',
     'bul',
@@ -336,7 +336,7 @@ VERB_MINOR_HARMONY_EXCEPTIONS:tuple = (
     'vur'
 )
 
-NON_T_D_CHANGE_VERBS:tuple = (
+NON_T_D_CHANGE_VERBS: tuple = (
     'bellet',
     'denet',
     'döşet',
@@ -364,7 +364,7 @@ NON_T_D_CHANGE_VERBS:tuple = (
     tat -> tadı
     kap -> kabı
 """
-SOFTEN_SINGLE_SYLLABLE_NOUNS:tuple = (
+SOFTEN_SINGLE_SYLLABLE_NOUNS: tuple = (
     'gök',
     'çok',
     'yok',
