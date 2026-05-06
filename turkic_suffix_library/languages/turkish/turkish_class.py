@@ -115,7 +115,9 @@ class TurkishClass(TurkicClass):
 
         for noun in con.NK_G_CHANGE:
             if word.endswith(noun):
-                self.word = self.from_upper_or_lower(word[:-len(noun)] + con.NK_G_CHANGE.get(noun, self.word))
+                self.word = self.from_upper_or_lower(
+                    word[:-len(noun)] + con.NK_G_CHANGE.get(noun, self.word)
+                )
                 return self.word
 
         return self.word

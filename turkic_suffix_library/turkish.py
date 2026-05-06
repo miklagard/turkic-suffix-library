@@ -58,7 +58,7 @@ class Turkish(TurkishClass):
         # firstly exceptions for ben (I) and you (sen)
 
         lower_word = self.lower(self.word)
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         self.apostrophes(**kwargs)
 
@@ -90,7 +90,7 @@ class Turkish(TurkishClass):
         """
         self.apostrophes(**kwargs)
 
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         if self.n_connector():
             self.concat('n')
@@ -105,7 +105,7 @@ class Turkish(TurkishClass):
         """
             -de hali
         """
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         self.apostrophes(**kwargs)
 
@@ -152,7 +152,7 @@ class Turkish(TurkishClass):
             Ismin esitlik hali: -ce, -ca etc.
         """
 
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         if self.n_connector():
             self.concat('n')
@@ -267,7 +267,8 @@ class Turkish(TurkishClass):
 
             This rule is also valid for words:
             * son (last) -> sonuncu
-            * ilk (first) -> ilkinci (ilk already means "first" but you can still put this suffix)
+            * ilk (first) -> ilkinci
+            (ilk already means "first" but you can still put this suffix)
         """
 
         self.if_ends_with('t', 'd')
@@ -278,7 +279,6 @@ class Turkish(TurkishClass):
         self.concat(f'nc{self.minor()}')
 
         return self.common_return('ordinal', **kwargs)
-
 
     def distributive(self, **kwargs):
         """
@@ -298,7 +298,6 @@ class Turkish(TurkishClass):
 
         return self.common_return('distributive', **kwargs)
 
-    
     def copula_present(self, **kwargs):
         """
             kedidir
@@ -426,7 +425,6 @@ class Turkish(TurkishClass):
         )
         return self.common_return('copula_indefinite_past', **kwargs)
 
-    
     def infinitive(self, **kwargs):
         """
             Mastar eki
@@ -450,7 +448,8 @@ class Turkish(TurkishClass):
         """
             Şimdiki zaman
             Example: arıyorum
-            Note: For alternative usage of present continuous tense, check the function
+            Note: For alternative usage of present continuous tense,
+            check the function
                     present_continuous_simple_alternative
         """
         from_able: bool = self.is_from_able()
@@ -505,16 +504,19 @@ class Turkish(TurkishClass):
             )
 
         return self.common_return('present_continuous_simple', **kwargs)
-    
-    def present_continuous_simple_alternative(self, **kwargs):
+
+    def present_continuous_simple_alternative(
+            self, **kwargs
+    ):
         """
-            There are two ways to express 'present continuous tense in Turkish '
+            There are two ways to express
+            'present continuous tense in Turkish '
             This kind is not common in daily Turkish usage anymore
             Example:
                 * aramaktayım
                 * yapmaktayım
         """
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
@@ -544,7 +546,10 @@ class Turkish(TurkishClass):
         if question and person == 3 and plural:
             self.concat(f' m{self.minor()}')
 
-        return self.common_return('present_continuous_simple_alternative', **kwargs)
+        return self.common_return(
+            'present_continuous_simple_alternative',
+            **kwargs
+        )
 
     def simple_tense(self, **kwargs):
         """
@@ -556,7 +561,7 @@ class Turkish(TurkishClass):
         plural: bool = kwargs.get('plural', False)
         person: int = kwargs.get('person', 3)
 
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         if not negative:
             self.soften()
@@ -614,7 +619,7 @@ class Turkish(TurkishClass):
 
         self.if_condition(
             person, plural,
-            [1, False, f'm'],
+            [1, False, 'm'],
             [2, False, f's{self.minor()}n'],
             [1, True, 'z'],
             [2, True, f's{self.minor()}n{self.minor()}z'],
@@ -642,19 +647,19 @@ class Turkish(TurkishClass):
             -di'li geçmiş zaman
         """
 
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
 
-        minor : str = self.minor()
+        minor: str = self.minor()
 
         if self.last_letter_is_vowel() or not self.last_letter_is_hard():
-            letter_d : str = 'd'
+            letter_d: str = 'd'
         else:
-            letter_d : str = 't'
+            letter_d: str = 't'
 
         plural: bool = kwargs.get('plural', False)
         person: int = kwargs.get('person', 3)
@@ -726,23 +731,27 @@ class Turkish(TurkishClass):
             plural=plural
         ).to_string())
 
-        return self.common_return('past_progressive_alternative_dubitative', **kwargs)
+        return self.common_return(
+            'past_progressive_alternative_dubitative',
+            **kwargs
+        )
 
     def indefinite_past(self, **kwargs):
         """
             Past Aorist
             Not the same with English past perfect tense
-            This usage is for past tense of an action which is heared/learned but not witnessed.
+            This usage is for past tense of an action
+            which is heard/learned but not witnessed.
             mişli geçmiş zaman veya öğrenilen geçmiş zaman
         """
 
-        letter_a : str = self.letter_a()
+        letter_a: str = self.letter_a()
         from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{letter_a}')
 
-        minor : str = self.minor()
+        minor: str = self.minor()
 
         self.concat(f'm{minor}ş')
 
@@ -771,7 +780,7 @@ class Turkish(TurkishClass):
             )
 
         return self.common_return('indefinite_past', **kwargs)
-    
+
     def past_progressive_narrative(self, **kwargs):
         negative: bool = kwargs.get('negative', False)
         question: bool = kwargs.get('question', False)
@@ -798,7 +807,7 @@ class Turkish(TurkishClass):
         ).to_string())
 
         return self.common_return('past_progressive_narrative', **kwargs)
-    
+
     def past_progressive_alternative_narrative(self, **kwargs):
         negative: bool = kwargs.get('negative', False)
         question: bool = kwargs.get('question', False)
@@ -826,7 +835,10 @@ class Turkish(TurkishClass):
             plural=plural
         ).to_string())
 
-        return self.common_return('past_progressive_alternative_narrative', **kwargs)
+        return self.common_return(
+            'past_progressive_alternative_narrative',
+            **kwargs
+        )
 
     def past_perfect_narrative(self, **kwargs):
         negative: bool = kwargs.get('negative', False)
@@ -862,12 +874,18 @@ class Turkish(TurkishClass):
     def doubtful_distant_past(self, **kwargs):
         """
             Öğrenilen geçmiş zamanın rivayeti
-            Duymuşmuşum Duymuşmuşsun Duymuşmuş Duymuşmuşuz Duymuşmuşunuz Duymuşmuşlar
-            Duymuş mumuymuşum? Duymuş mumuymuşsun? Duymuş mumuymuş? Duymuş mumuymuşuz?
+            Duymuşmuşum Duymuşmuşsun Duymuşmuş
+            Duymuşmuşuz Duymuşmuşunuz Duymuşmuşlar
+            Duymuş mumuymuşum? Duymuş mumuymuşsun?
+            Duymuş mumuymuş? Duymuş mumuymuşuz?
             Duymuş mumuymuşsunuz Duymuşlar mıymış?
         """
 
-        self.replace_word(self.indefinite_past(negative=kwargs.get('negative', False)).to_string())
+        self.replace_word(
+            self.indefinite_past(
+                negative=kwargs.get('negative', False)
+            ).to_string()
+        )
 
         if not kwargs.get('question', False):
             self.replace_word(self.indefinite_past(
@@ -934,8 +952,8 @@ class Turkish(TurkishClass):
         return self.common_return('simple_conditional_narrative', **kwargs)
 
     def past_conditional_dubitative(self, **kwargs):
-        letter_a : str = self.letter_a()
-        letter_i : str = self.letter_i()
+        letter_a: str = self.letter_a()
+        letter_i: str = self.letter_i()
         negative: bool = kwargs.get('negative', False)
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
@@ -969,7 +987,7 @@ class Turkish(TurkishClass):
         """
             Gelecek zaman
         """
-        ae : str = self.letter_a()
+        ae: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
@@ -984,9 +1002,9 @@ class Turkish(TurkishClass):
 
         if not kwargs.get('negative', False):
             self.harden_verb()
-        
-        letter_a : str = self.letter_a()
-        letter_i : str = self.letter_i()
+
+        letter_a: str = self.letter_a()
+        letter_i: str = self.letter_i()
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
 
@@ -1031,9 +1049,9 @@ class Turkish(TurkishClass):
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
 
-        letter_i : str = self.letter_i()
-        letter_d : str = 'd'
-        
+        letter_i: str = self.letter_i()
+        letter_d: str = 'd'
+
         if self.last_letter_is_hard():
             letter_d = 't'
 
@@ -1062,7 +1080,10 @@ class Turkish(TurkishClass):
         """
             süzecekmişim
         """
-        self.replace_word(self.future_simple(negative=kwargs.get('negative', False)).to_string())
+        self.replace_word(
+            self.future_simple(
+                negative=kwargs.get('negative', False)
+            ).to_string())
 
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
@@ -1070,7 +1091,7 @@ class Turkish(TurkishClass):
         if person == 3 and plural:
             self.concat(f'l{self.letter_a()}r')
 
-        letter_i : str = self.letter_i()
+        letter_i: str = self.letter_i()
 
         self.concat(f'm{letter_i}ş')
 
@@ -1099,15 +1120,15 @@ class Turkish(TurkishClass):
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
         negative: bool = kwargs.get('negative', False)
-        
+
         self.future_simple(person=3, negative=negative)
 
-        letter_a : str = self.letter_a()
-        letter_i : str = self.letter_i()
+        letter_a: str = self.letter_a()
+        letter_i: str = self.letter_i()
 
         if person == 3 and plural:
             self.concat(f'l{letter_a}r')
-            
+
         self.concat(f's{letter_a}')
 
         self.if_condition(
@@ -1125,10 +1146,13 @@ class Turkish(TurkishClass):
 
     def unify_verbs(self, **kwargs):
         """
-            Unified verbs (Birleşik fiiler) (Not a suffix but for 'can-bil' modal verb, this is necessary)
-            Ability - Yeterlilik: kızabil (bil) (English modal auxiliary verb: Can)
+            Unified verbs (Birleşik fiiler)
+            (Not a suffix but for 'can-bil' modal verb, this is necessary)
+            Ability - Yeterlilik: kızabil (bil)
+            (English modal auxiliary verb: Can)
             Swiftness - Tezlik: koşuver (ver)
-            Continuity - Süreklilik: gidedur, bakakal, alıkoy (dur, kal, gel, koy)
+            Continuity - Süreklilik: gidedur, bakakal, alıkoy
+            (dur, kal, gel, koy)
             Approach - Yaklaşma: (yaz) düzeyaz
         """
         self.verbs_losing_vowels()
@@ -1157,8 +1181,8 @@ class Turkish(TurkishClass):
         return self.common_return('unify_verbs', **kwargs)
 
     def necessitative_mood(self, **kwargs):
-        letter_a : str = self.letter_a()
-        letter_i : str = self.letter_i()
+        letter_a: str = self.letter_a()
+        letter_i: str = self.letter_i()
 
         if kwargs.get('negative', False) and not self.is_from_able():
             self.concat(f'm{letter_a}')
@@ -1173,7 +1197,7 @@ class Turkish(TurkishClass):
             süzmeliydim
         """
 
-        letter_i : str = self.letter_i()
+        letter_i: str = self.letter_i()
 
         self.necessitative_mood()
 
@@ -1202,7 +1226,7 @@ class Turkish(TurkishClass):
             süzmeliydim
         """
 
-        letter_i : str = self.letter_i()
+        letter_i: str = self.letter_i()
         negative: bool = kwargs.get('negative', False)
 
         self.necessitative_mood(negative=negative)
@@ -1234,7 +1258,7 @@ class Turkish(TurkishClass):
             süzmeliymişim
         """
 
-        letter_i : str = self.letter_i()
+        letter_i: str = self.letter_i()
         negative: bool = kwargs.get('negative', False)
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
@@ -1265,19 +1289,20 @@ class Turkish(TurkishClass):
         """
             Make the verb command
             Usage: do it, break it, come!
-            As different from English, imperative mood is valid also for 3rd person in Turkish
+            As different from English,
+            imperative mood is valid also for 3rd person in Turkish
                 but never for 1st person.
             For the second person, there is no suffix
         """
 
-        ae : str = self.letter_a()
+        ae: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
         if kwargs.get('negative', False) and not from_able:
             self.concat(f'm{ae}')
 
-        minor : str = self.minor()
+        minor: str = self.minor()
 
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
@@ -1322,8 +1347,8 @@ class Turkish(TurkishClass):
         """
             Dilek - Şart kipi (-se, -sa)
         """
-        letter_a : str = self.letter_a()
-        letter_i : str = self.letter_i()
+        letter_a: str = self.letter_a()
+        letter_i: str = self.letter_i()
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
         from_able: bool = self.is_from_able()
@@ -1351,8 +1376,8 @@ class Turkish(TurkishClass):
         """
             İstek kipi (geleyim, gelesin, gele, gelelim, gelesiniz, geleler)
         """
-        letter_a : str = self.letter_a()
-        letter_i : str = self.letter_i()
+        letter_a: str = self.letter_a()
+        letter_i: str = self.letter_i()
         person: int = kwargs.get('person', 3)
         plural: bool = kwargs.get('plural', False)
 
@@ -1392,7 +1417,8 @@ class Turkish(TurkishClass):
         """
             Bilinen geçmiş zamanın hikayesi
             yaptıydım, yaptıydın, yaptıydı, yaptıydık, yaptıydınız, yaptıydılar
-            yaptı mıydım, yaptı mıydın, yaptı mıydı, yaptı mıydık, yaptı mıydınız, yaptılar mıydı
+            yaptı mıydım, yaptı mıydın, yaptı mıydı,
+            yaptı mıydık, yaptı mıydınız, yaptılar mıydı
         """
 
         person: int = kwargs.get('person', 3)
@@ -1466,7 +1492,11 @@ class Turkish(TurkishClass):
                 [2, False, f' m{self.letter_i()}s{self.letter_i()}n'],
                 [3, False, f' m{self.letter_i()}'],
                 [1, True, f' m{self.letter_i()}y{self.letter_i()}z'],
-                [2, True, f' m{self.letter_i()}s{self.letter_i()}n{self.letter_i()}z'],
+                [
+                    2,
+                    True,
+                    f' m{self.letter_i()}s{self.letter_i()}n{self.letter_i()}z'
+                ],
             )
         else:
             self.indefinite_past(
@@ -1522,7 +1552,9 @@ class Turkish(TurkishClass):
         """
             Öğrenilen geçmiş zamanın hikayesi
             Yapmışlardı (-miş -di)
-            Example: It is heard by someone that somebody did something in the past
+            Example:
+                It is heard by someone that
+                somebody did something in the past
         """
 
         person: int = kwargs.get('person', 3)
@@ -1561,7 +1593,9 @@ class Turkish(TurkishClass):
         """
             Gelecek zamanın rivayeti
             Yapacaklardı (-acak -mış)
-            Example: It is heard by someone that somebody will do something in the past
+            Example:
+              It is heard by someone
+              that somebody will do something in the past
         """
 
         person: int = kwargs.get('person', 3)
@@ -1583,10 +1617,10 @@ class Turkish(TurkishClass):
         if question:
             self.concat(f' m{self.minor()}')
 
-        self.if_ends_with_vowel(f'y')
+        self.if_ends_with_vowel('y')
         self.concat(f'm{self.letter_i()}ş')
 
-        i : str = self.letter_i()
+        i: str = self.letter_i()
 
         self.if_condition(
             person, plural,
@@ -1624,7 +1658,11 @@ class Turkish(TurkishClass):
 
         if person == 3 and plural and question:
             self.concat('y')
-            self.replace_word(self.past_definite(person=kwargs.get('person', 3)).to_string())
+            self.replace_word(
+                self.past_definite(
+                    person=kwargs.get('person', 3)
+                ).to_string()
+            )
         else:
             if kwargs.get('question', False):
                 self.concat('y')
@@ -1643,7 +1681,8 @@ class Turkish(TurkishClass):
             Kirdim -> Kirildim
             I brake -> I am broken
 
-            Use passive always before conjuncting the verb with tense and person
+            Use passive always before conjuncting the verb
+            with tense and person
 
             Example:
             Turkish('ver').passive().present_continuous_alternative(person=1)
@@ -1651,9 +1690,9 @@ class Turkish(TurkishClass):
         """
         self.harden_verb()
 
-        lower_word : str = self.lower(self.word)
+        lower_word: str = self.lower(self.word)
 
-        minor : str = self.minor()
+        minor: str = self.minor()
 
         if lower_word.endswith('l'):
             self.concat(self.minor())
@@ -1665,7 +1704,7 @@ class Turkish(TurkishClass):
         self.concat(f'{minor}l')
 
         return self.common_return('passive', **kwargs)
-    
+
     def adverb_during_action(self, **kwargs):
         """
             Giderken etc. (iken)
@@ -1684,17 +1723,17 @@ class Turkish(TurkishClass):
         """
         self.if_ends_with_vowel('y')
 
-        self.concat(f'ken')
+        self.concat('ken')
 
         return self.common_return('adverb_during_action', **kwargs)
-    
+
     def adverb_continuity(self, **kwargs):
         """
             Git -> Gide gide etc. (-e)
 
             Use this method without conjuncting
         """
-        ae : str = self.letter_a()
+        ae: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
@@ -1720,7 +1759,7 @@ class Turkish(TurkishClass):
 
             Use this method without conjuncting
         """
-        ae : str = self.letter_a()
+        ae: str = self.letter_a()
 
         self.replace_word(self.past_definite(
             negative=kwargs.get('negative', False),
@@ -1741,9 +1780,9 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae : str = self.letter_a()
-        letter_i : str = self.letter_i()
-        minor : str = self.minor()
+        ae: str = self.letter_a()
+        letter_i: str = self.letter_i()
+        minor: str = self.minor()
         from_able: bool = self.is_from_able()
 
         self.harden_verb()
@@ -1751,7 +1790,7 @@ class Turkish(TurkishClass):
         if kwargs.get('negative', False):
             if not from_able:
                 self.concat(f'm{ae}')
-            
+
             self.concat(f'y{letter_i}')
         elif self.last_letter_is_vowel():
             self.concat(f'y{minor}')
@@ -1771,8 +1810,8 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae : str = self.letter_a()
-        minor : str = self.minor()
+        ae: str = self.letter_a()
+        minor: str = self.minor()
 
         from_able: bool = self.is_from_able()
 
@@ -1799,7 +1838,7 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae : str = self.letter_a()
+        ae: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
@@ -1819,11 +1858,14 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        letter_i : str = self.letter_i()
+        letter_i: str = self.letter_i()
         self.word = self.infinitive().to_string()
         self.concat(f's{letter_i}z{letter_i}n')
 
-        return self.common_return('adverb_without_action_alternative', **kwargs)
+        return self.common_return(
+            'adverb_without_action_alternative',
+            **kwargs
+        )
 
     def adverb_by_action(self, **kwargs):
         """
@@ -1834,7 +1876,7 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae : str = self.letter_a()
+        ae: str = self.letter_a()
 
         from_able: bool = self.is_from_able()
 
@@ -1843,13 +1885,13 @@ class Turkish(TurkishClass):
                 self.concat(f'm{ae}')
         else:
             self.harden_verb()
-            
+
         self.if_ends_with_vowel('y')
 
         self.concat(f'{ae}r{ae}k')
 
         return self.common_return('adverb_by_action', **kwargs)
-    
+
     def adverb_since_action(self, **kwargs):
         """
             Gideli etc. (-eli)
@@ -1859,8 +1901,8 @@ class Turkish(TurkishClass):
             Use this method without any conjuncting
         """
 
-        ae : str = self.letter_a()
-        letter_i : str = self.letter_i()
+        ae: str = self.letter_a()
+        letter_i: str = self.letter_i()
 
         from_able: bool = self.is_from_able()
 

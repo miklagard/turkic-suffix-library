@@ -7,14 +7,14 @@ def make_lower(word: str) -> str:
 
 def make_upper(word: str) -> str:
     return word.replace('i', 'İ').replace('ı', 'I').upper()
- 
+
 
 def concat(string_left: str, string_right: str) -> str:
     if string_left.isupper():
         return_data = string_left + make_upper(string_right)
     else:
         return_data = string_left + string_right
-    
+
     return return_data
 
 
@@ -27,7 +27,7 @@ def from_upper_or_lower(new_word, reference_word):
         else:
             return_data = make_lower(new_word)
 
-    return return_data 
+    return return_data
 
 
 def last_vowel(word: str) -> dict:
@@ -53,7 +53,7 @@ def last_vowel(word: str) -> dict:
             return_data = {'letter': 'e', 'tone': 'back'}
         elif return_data['letter'] == '':
             return_data = {'letter': 'ü', 'tone': 'back'}
-        
+
     if return_data == '':
         return_data = {'letter': '', 'tone': 'back'}
 
@@ -81,22 +81,25 @@ def last_letter(word: str) -> dict:
 
     if actual_last_letter == '\'':
         actual_last_letter = word[len(word) - 2]
-    
-    return_data['letter'] = actual_last_letter      
-    
+
+    return_data['letter'] = actual_last_letter
+
     if actual_last_letter in consonants.VOWELS:
         return_data['vowel'] = True
-        if actual_last_letter in consonants.FRONT_VOWELS and word not in consonants.MAJOR_HAMONY_EXCEPTIONS:
+        if (actual_last_letter in consonants.FRONT_VOWELS
+                and word not in consonants.MAJOR_HAMONY_EXCEPTIONS):
             return_data['front_vowel'] = True
         else:
             return_data['back_vowel'] = True
     else:
         return_data['consonant'] = True
-        
+
         if actual_last_letter in consonants.DISCONTINUOUS_HARD_CONSONANTS:
             return_data['discontinuous_hard_consonant'] = True
             actual_last_letter = consonants.SOFTEN_DHC[
-                consonants.DISCONTINUOUS_HARD_CONSONANTS.index(actual_last_letter)
+                consonants.DISCONTINUOUS_HARD_CONSONANTS.index(
+                    actual_last_letter
+                )
             ]
             return_data['soften_consonant'] = actual_last_letter
 
@@ -108,10 +111,13 @@ def last_letter(word: str) -> dict:
     if actual_last_letter in consonants.HARD_CONSONANTS and word:
         return_data['hard_consonant'] = True
 
-        if actual_last_letter in consonants.DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX:
+        if (actual_last_letter
+                in consonants.DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX):
             return_data['discontinuous_hard_consonant_for_suffix'] = True
             actual_last_letter = consonants.SOFTEN_DHC_AFTER_SUFFIX[
-                consonants.DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX.index(actual_last_letter)
+                consonants.DISCONTINUOUS_HARD_CONSONANTS_AFTER_SUFFIX.index(
+                    actual_last_letter
+                )
             ]
             return_data['soften_consonant_for_suffix'] = actual_last_letter
 
@@ -126,9 +132,12 @@ def soften(parameter_word: str) -> str:
     actual_last_vowel: dict = last_vowel(word)
 
     if 'discontinuous_hard_consonant' in actual_last_letter:
-        if actual_last_vowel['vowel_count'] > 1 or word in consonants.SOFTEN_SINGLE_SYLLABLE_NOUNS:
-            if lower not in consonants.ARABIC_K or actual_last_letter.get('letter') != 'k':
-                if lower in consonants.ARABIC_T or actual_last_letter.get('letter') != 't':
+        if (actual_last_vowel['vowel_count'] > 1
+                or word in consonants.SOFTEN_SINGLE_SYLLABLE_NOUNS):
+            if (lower not in consonants.ARABIC_K
+                    or actual_last_letter.get('letter') != 'k'):
+                if (lower in consonants.ARABIC_T
+                        or actual_last_letter.get('letter') != 't'):
                     word = concat(
                         word[0:len(word) - 1],
                         actual_last_letter['soften_consonant']
@@ -137,7 +146,7 @@ def soften(parameter_word: str) -> str:
     return word
 
 
-def exception_missing(parameter_word: str, proper_noun: bool=False) ->str:
+def exception_missing(parameter_word: str, proper_noun: bool = False) -> str:
     if not proper_noun:
         last: str = last_word(parameter_word)
 
@@ -155,4 +164,3 @@ def exception_missing(parameter_word: str, proper_noun: bool=False) ->str:
             return last
 
     return parameter_word
-

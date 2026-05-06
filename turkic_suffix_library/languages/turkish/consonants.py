@@ -43,7 +43,8 @@ HARMONY_FOR_PRESENT: dict = {
     'ı': 'a',
 }
 
-# When a foreign word ends with b, c or d loaned to Turkish, the last letter transforms into p, ç or t.
+# When a foreign word ends with b, c or d loaned to Turkish,
+# the last letter transforms into p, ç or t.
 # eg. Standard (English) -> Standart (Turkish)
 #     Kabāb (Arabic) -> Kebap (Turkish)
 # If the loaned word is coming from Arabic and if the last letter is Arabic d,
@@ -122,7 +123,8 @@ ARABIC_K: tuple = (
     'zevk'
 )
 
-# The exception words which has non-Turkish origins don't fit for standard Turkish Major Vowel Harmony
+# The exception words which has non-Turkish origins
+# don't fit for standard Turkish Major Vowel Harmony
 # because of the vocal difference which doesn't exist in Turkish.
 MAJOR_HAMONY_EXCEPTIONS: tuple = (
     'abajur',
@@ -255,10 +257,10 @@ EXCEPTION_MISSING: dict = {
     'ilim': 'ilm',
     'boyun': 'boyn',
     'nesil': 'nesl',
-    'koyun': 'koyn',  # koyun (sheep) or koyun (bosom)? for koyun (sheep) there is no
-    # exception but for koyun (bosom) there is. aaaaargh turkish!!
-    'karın': 'karn',  # same with this, karın (your wife) or karın (stomach)?
-    # for karın (your wife) there is not a such exception
+    # koyun (sheep) or koyun (bosom)? for koyun (sheep) there is no
+    'koyun': 'koyn',
+    # same with this, karın (your wife) or karın (stomach)?
+    'karın': 'karn',
     'fasıl': 'fasl',
     'nakit': 'nakt',
     # Thanks to Tim Inva for additions
@@ -287,7 +289,8 @@ VERBS_HARDEN: dict = {
     'et': 'ed'
 }
 
-# K -> G change in some nouns ending with -nk (not all of them, for instance: link, bank)
+# K -> G change in some nouns ending with -nk
+# (not all of them, for instance: link, bank)
 NK_G_CHANGE: dict = {
     'renk': 'reng',
     'frank': 'frang',
@@ -357,13 +360,14 @@ NON_T_D_CHANGE_VERBS: tuple = (
     tek -> teki
     kök -> kökü
     kat -> katı
-    
+
     but:
-    
+
     çok -> coĞu
     tat -> tadı
     kap -> kabı
 """
+
 SOFTEN_SINGLE_SYLLABLE_NOUNS: tuple = (
     'gök',
     'çok',

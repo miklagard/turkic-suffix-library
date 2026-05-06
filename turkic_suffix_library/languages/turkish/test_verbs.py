@@ -5,12 +5,15 @@ import unittest
 class Adverb(unittest.TestCase):
     def test_adverb_during_action(self):
         self.assertEqual(
-            Turkish('it').present_continuous_simple().adverb_during_action().to_string(),
+            Turkish('it').present_continuous_simple().
+            adverb_during_action().to_string(),
             'itiyorken'
         )
 
         self.assertEqual(
-            Turkish('it').present_continuous_simple(negative=True).adverb_during_action().to_string(),
+            Turkish('it').present_continuous_simple(
+                negative=True
+            ).adverb_during_action().to_string(),
             'itmiyorken'
         )
 
@@ -32,7 +35,9 @@ class Adverb(unittest.TestCase):
         )
 
         self.assertEqual(
-            Turkish('git').adverb_after_action_alternative(negative=True).to_string(),
+            Turkish('git').adverb_after_action_alternative(
+                negative=True
+            ).to_string(),
             'gitmeyip'
         )
 
@@ -166,8 +171,9 @@ class Noun(unittest.TestCase):
         )
 
     def test_genitive_possessive(self):
+        possesive = Turkish("Öküz").possessive(person=3)
         self.assertEqual(
-            f'{Turkish("Elif").genitive(proper_noun=True)} {Turkish("Öküz").possessive(person=3)}',
+            f'{Turkish("Elif").genitive(proper_noun=True)} {possesive}',
             'Elif\'in Öküzü'
         )
 
@@ -187,7 +193,10 @@ class Noun(unittest.TestCase):
 class Verb(unittest.TestCase):
     def test_passive(self):
         self.assertEqual(
-            Turkish('al').passive().present_continuous_simple(person=2, negative=True).to_string(),
+            Turkish('al').passive().
+            present_continuous_simple(
+                person=2, negative=True
+            ).to_string(),
             'alınılmıyorsun'
         )
 

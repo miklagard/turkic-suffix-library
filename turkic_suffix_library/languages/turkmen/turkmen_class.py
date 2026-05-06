@@ -59,12 +59,16 @@ class TurkmenClass(TurkicClass):
     def last_letter_is_vowel(self):
         letter = self.last_letter()
 
-        return letter in constants.VOWELS.get('front') or letter in constants.VOWELS.get('back')
+        return (
+                letter in constants.VOWELS.get('front')
+                or letter in constants.VOWELS.get('back'))
 
     def missing_vowel(self):
         lower = self.lower(self.word)
 
-        self.word = self.from_upper_or_lower(constants.MISSING_VOWEL.get(lower, self.word))
+        self.word = self.from_upper_or_lower(
+            constants.MISSING_VOWEL.get(lower, self.word)
+        )
 
         return self.word
 
@@ -80,8 +84,11 @@ class TurkmenClass(TurkicClass):
         word = self.last_word()
 
         for letter in word:
-            if letter in constants.VOWELS.get('front') or letter in constants.VOWELS.get('back'):
+            if (letter in constants.VOWELS.get('front')
+                    or letter in constants.VOWELS.get('back')):
                 return letter
+
+        return None
 
     def change_yi(self):
         lower = self.lower(self.word)
